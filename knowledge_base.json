@@ -1,0 +1,109 @@
+[
+  {
+    "company": "NeuroPulse",
+    "type": "Funding",
+    "date": "2025-08-12",
+    "summary": "Raised $40M in Series B to expand development of AI-powered neurostimulation devices targeting epilepsy and Parkinson’s."
+  },
+  {
+    "company": "CardioNova",
+    "type": "Clinical Trial",
+    "date": "2025-07-28",
+    "summary": "Initiated Phase II trial for its wearable cardiac monitor in collaboration with Mayo Clinic."
+  },
+  {
+    "company": "OrthoGenix",
+    "type": "Regulatory Filing",
+    "date": "2025-09-01",
+    "summary": "Submitted 510(k) application to FDA for its robotic-assisted knee replacement system."
+  },
+  {
+    "company": "LumaDerm",
+    "type": "Hiring",
+    "date": "2025-08-20",
+    "summary": "Hired VP of Regulatory Affairs, signaling preparation for international market expansion."
+  },
+  {
+    "company": "BioSight AI",
+    "type": "Funding",
+    "date": "2025-06-15",
+    "summary": "Secured $25M in Series A to accelerate development of AI-based diagnostic imaging platform."
+  },
+  {
+    "company": "TheraWave",
+    "type": "Product Launch",
+    "date": "2025-07-10",
+    "summary": "Launched non-invasive pain therapy device in European markets after CE mark approval."
+  },
+  {
+    "company": "NanoSpine",
+    "type": "Clinical Trial",
+    "date": "2025-08-05",
+    "summary": "Completed enrollment for Phase I trial of its nanotech spinal implant system."
+  },
+  {
+    "company": "ClearPath Robotics",
+    "type": "Regulatory Filing",
+    "date": "2025-09-15",
+    "summary": "Filed for Health Canada approval of its autonomous surgical navigation platform."
+  },
+  {
+    "company": "EchoSense",
+    "type": "Hiring",
+    "date": "2025-08-30",
+    "summary": "Added Director of Clinical Strategy to support upcoming trial for its fetal monitoring system."
+  },
+  {
+    "company": "VitaFlow",
+    "type": "Funding",
+    "date": "2025-09-10",
+    "summary": "Closed $18M Series A to scale production of its smart infusion pump for home care."
+  },
+  {
+    "id": "NCT05271656",
+    "title": "Evaluation of C-Scan Capsule in Identifying Subjects With Elevated Risk of Colon Polyps",
+    "conditions": [
+      "Healthy"
+    ]
+  },
+  {
+    "id": "NCT01972256",
+    "title": "Prospective Multicenter Clinical Evaluation of Fusion",
+    "conditions": [
+      "Pseudoarthrosis",
+      "Spinal Stenosis",
+      "Spondylolisthesis",
+      "Degenerative Disc Disease (DDD)"
+    ]
+  },
+  {
+    "id": "NCT03994822",
+    "title": "pRESET for Occlusive Stroke Treatment",
+    "conditions": [
+      "Brain Diseases",
+      "Cardiovascular Diseases",
+      "Central Nervous System Diseases",
+      "Cerebrovascular Disorders",
+      "Ischemia",
+      "Nervous System Diseases",
+      "Pathologic Processes",
+      "Stroke, Ischemic",
+      "Stroke, Acute",
+      "Vascular Diseases"
+    ]
+  },
+  {
+    "id": "NCT05949151",
+    "title": "Occlusal Forces and Muscle Activity in Fixed Versus Removable Mandibular Implant Supported Overdenture",
+    "conditions": [
+      "Occlusion"
+    ]
+  },
+  {
+    "id": "NCT00554151",
+    "title": "Mitral Adjustable Annuloplasty Ring Feasibility and Safety Study (MAARS) for Treatment of Patients With Mitral Valve Regurgitation in Open Surgical Repair",
+    "conditions": [
+      "Mitral Valve Regurgitation"
+    ]
+  }
+]
