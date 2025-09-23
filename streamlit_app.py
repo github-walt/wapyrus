@@ -5,10 +5,10 @@ import json
 from llm_interface import ask_roo
 from scrape_trials import fetch_trials, update_knowledge_base
 
-# Load signals
 def load_signals(file_path="knowledge_base.json"):
     with open(file_path, "r", encoding="utf-8") as f:
-        return json.load(f)
+        raw = json.load(f)
+    return [s for s in raw if "type" in s and s["type"]]
 
 # Filter signals by type
 def filter_signals(signals, selected_type):
@@ -46,7 +46,8 @@ query = st.text_input("Or ask your own question:", value=premade)
 
 # Load and filter signals
 signals = load_signals()
-filtered_signals = [s for s in signals if s["type"] == "INTERVENTIONAL"]
+filtered_signals = [s for s in signals if s.get("type") == "INTERVENTIONAL"]
+
 
 # Ask Roo
 if query:
@@ -58,4 +59,3 @@ if query:
 # Optional: Show raw signals
 with st.expander("📊 View signal data"):
     st.json(filtered_signals)
-
