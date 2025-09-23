@@ -68,4 +68,9 @@ if __name__ == "__main__":
     save_to_json(trials)
     print(f"Saved {len(trials)} trials to knowledge_base.json")
     
+def update_knowledge_base(keyword="medtech", filename="knowledge_base.json"):
+    trials = fetch_trials(keyword)
+    save_to_json(trials, filename)
+
+    
     
