@@ -8,9 +8,9 @@ def get_groq_client():
 def ask_roo(prompt, signals=None):
     client = get_groq_client()
 
-    # Optionally include signals in the prompt
-    if signals:
-        signal_text = "\n".join(signals)
+    # Safely format signals if they exist
+    if signals and isinstance(signals, list):
+        signal_text = "\n".join(str(s) for s in signals)
         prompt = f"{prompt}\n\nRelevant signals:\n{signal_text}"
 
     chat_completion = client.chat.completions.create(
@@ -28,3 +28,4 @@ def ask_roo(prompt, signals=None):
     )
 
     return chat_completion.choices[0].message.content
+
