@@ -46,7 +46,7 @@ query = st.text_input("Or ask your own question:", value=premade)
 
 # Load and filter signals
 signals = load_signals()
-filtered_signals = filter_signals(signals, selected_type)
+filtered_signals = [s for s in signals if s["type"] == "INTERVENTIONAL"]
 
 # Ask Roo
 if query:
@@ -58,3 +58,4 @@ if query:
 # Optional: Show raw signals
 with st.expander("📊 View signal data"):
     st.json(filtered_signals)
+
