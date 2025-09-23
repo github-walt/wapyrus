@@ -28,7 +28,7 @@ def ask_roo(prompt, signals=None):
                     "content": str(prompt),
                 }
             ],
-            model="mixtral-8x7b-32768"
+            model="llama-3.3-70b-versatile"
         )
         return chat_completion.choices[0].message.content
 
