@@ -1,77 +1,71 @@
 import requests
 import json
-import os
 
-def fetch_trials(keyword="medical device", max_results=10):
-    """
-    Fetch trials from the ClinicalTrials.gov v2 API.
-    Returns a list of simplified trial dictionaries.
-    """
-    base_url = "https://clinicaltrials.gov/api/v2/studies"
-    params = {
-        "query.term": keyword,
-        "pageSize": max_results,
-        "format": "json"   # request JSON output
-    }
+BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
+MAX_RECORDS = 500  # Total number of trials to fetch
+PAGE_SIZE = 100    # Number of trials per page
 
-    response = requests.get(base_url, params=params)
-    if response.status_code != 200:
-        print("URL:", response.url)
-        print("Response status:", response.status_code)
-        print("Response text:", response.text)
-        raise Exception(f"Failed to fetch data: {response.status_code}")
+def clean_list(items):
+    return [item for item in items if item.strip()]
 
-    data = response.json()
+def normalize(value):
+    return value.strip() if isinstance(value, str) and value.strip() else None
 
-    trials = data.get("studies", [])
-    signals = []
+def fetch_trials(keyword="medtech", max_records=MAX_RECORDS):
+    trials = []
+    page_token = None
+    fetched = 0
 
-    for t in trials:
-        protocol = t.get("protocolSection", {})
-        id_module = protocol.get("identificationModule", {})
-        ct_id = id_module.get("nctId")
-        title = id_module.get("officialTitle") or id_module.get("briefTitle")
+    while fetched < max_records:
+        params = {
+            "query.term": keyword,
+            "pageSize": PAGE_SIZE,
+            "format": "json"
+        }
+        if page_token:
+            params["pageToken"] = page_token
 
-        cond_module = protocol.get("conditionsModule", {})
-        conditions = cond_module.get("conditions", [])
+        response = requests.get(BASE_URL, params=params)
+        data = response.json()
 
-        signals.append({
-            "id": ct_id,
-            "title": title,
-            "conditions": conditions
-        })
+        studies = data.get("studies", [])
+        for study in studies:
+            protocol = study.get("protocolSection", {})
+            trial = {
+                "id": normalize(protocol.get("identificationModule", {}).get("nctId", "")),
+                "title": normalize(protocol.get("identificationModule", {}).get("briefTitle", "")),
+                "condition": clean_list(protocol.get("conditionsModule", {}).get("conditions", [])),
+                "intervention": clean_list([
+                    i.get("name", "") for i in protocol.get("armsInterventionsModule", {}).get("interventions", [])
+                ]),
+                "phase": normalize(protocol.get("designModule", {}).get("phase", "")),
+                "type": normalize(protocol.get("designModule", {}).get("studyType", "")),
+                "status": normalize(protocol.get("statusModule", {}).get("overallStatus", "")),
+                "start_date": normalize(protocol.get("statusModule", {}).get("startDateStruct", {}).get("date", "")),
+                "completion_date": normalize(protocol.get("statusModule", {}).get("completionDateStruct", {}).get("date", "")),
+                "sponsor": normalize(protocol.get("sponsorCollaboratorsModule", {}).get("leadSponsor", {}).get("name", "")),
+                "location": clean_list([
+                    loc.get("locationFacility", "") for loc in protocol.get("contactsLocationsModule", {}).get("locations", [])
+                ]),
+                "enrollment": normalize(protocol.get("designModule", {}).get("enrollmentInfo", {}).get("actualEnrollment", ""))
+}
 
-    return signals
+            trials.append(trial)
 
+        fetched += len(studies)
+        page_token = data.get("nextPageToken")
+        if not page_token:
+            break
 
-def update_knowledge_base(trials, filename="knowledge_base.json"):
-    """
-    Save trials into knowledge_base.json, appending if file exists.
-    """
-    # Load existing knowledge base if present
-    if os.path.exists(filename):
-        with open(filename, "r", encoding="utf-8") as f:
-            try:
-                kb = json.load(f)
-            except json.JSONDecodeError:
-                kb = []
-    else:
-        kb = []
+    return trials
 
-    # Extend and deduplicate by trial id
-    existing_ids = {entry["id"] for entry in kb if "id" in entry}
-    for trial in trials:
-        if trial["id"] not in existing_ids:
-            kb.append(trial)
-
-    # Save back
+def save_to_json(trials, filename="knowledge_base.json"):
     with open(filename, "w", encoding="utf-8") as f:
-        json.dump(kb, f, indent=2, ensure_ascii=False)
-
-    print(f"✅ knowledge_base.json updated with {len(trials)} trials. Total now: {len(kb)}")
-
+        json.dump(trials, f, indent=2)
 
 if __name__ == "__main__":
-    print("🔍 Fetching clinical trial signals…")
-    trials = fetch_trials(keyword="medical device", max_results=5)
-    update_knowledge_base(trials)
+    trials = fetch_trials()
+    save_to_json(trials)
+    print(f"Saved {len(trials)} trials to knowledge_base.json")
+    
+    
