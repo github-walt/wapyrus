@@ -8,16 +8,14 @@
     "intervention": [
       "DragonFire Transcatheter Myocardial Radiofrequency Ablation System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "ACTIVE_NOT_RECRUITING",
     "start_date": "2022-10-13",
     "completion_date": "2024-11-30",
     "sponsor": "Hangzhou Valgen Medtech Co., Ltd",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05519787",
@@ -34,16 +32,14 @@
     "intervention": [
       "Central Veinous access devices' insertion"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "COMPLETED",
     "start_date": "2021-12-14",
     "completion_date": "2022-05-19",
     "sponsor": "Perouse Medical",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04918212",
@@ -54,39 +50,14 @@
     "intervention": [
       "Fabulous Stent Graft System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2017-11-25",
     "completion_date": "2020-10-13",
     "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT02071654",
@@ -97,16 +68,14 @@
     "intervention": [
       "Venus P-valve transcatheter implantation"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2014-02",
     "completion_date": "2016-02",
     "sponsor": "Venus MedTech (HangZhou) Inc.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04734756",
@@ -117,16 +86,14 @@
     "intervention": [
       "Dragonfly Transcatheter Mitral Valve Repair System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "ENROLLING_BY_INVITATION",
     "start_date": "2021-05-04",
     "completion_date": "2027-05-31",
     "sponsor": "Hangzhou Valgen Medtech Co., Ltd",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04745039",
@@ -137,16 +104,14 @@
     "intervention": [
       "Endopatch System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2021-04-15",
     "completion_date": "2023-12-15",
     "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT07136272",
@@ -160,18 +125,14 @@
       "Polysomnography",
       "EnsoSleep"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "NOT_YET_RECRUITING",
     "start_date": "2025-09",
     "completion_date": "2025-12",
     "sponsor": "Pathway Medtech, LLC.",
-    "location": [
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06445023",
@@ -183,238 +144,14 @@
       "barzolvolimab",
       "Matching placebo"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2024-07-11",
     "completion_date": "2027-04",
     "sponsor": "Celldex Therapeutics",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT01807260",
@@ -425,16 +162,14 @@
     "intervention": [
       "Shock wave lithotripsy"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2008-03",
     "completion_date": "2012-06",
     "sponsor": "TC Erciyes University",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04617899",
@@ -445,19 +180,14 @@
     "intervention": [
       "Intravascular imaging"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2021-03-17",
     "completion_date": "2021-12-31",
     "sponsor": "CardioNavi MedTech (Wuhan) Co., Ltd.",
-    "location": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06485492",
@@ -468,14 +198,14 @@
     "intervention": [
       "Implant an aneurysm embolization system"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "NOT_YET_RECRUITING",
     "start_date": "2024-08-01",
     "completion_date": "2026-07-31",
     "sponsor": "Jiangsu CED Medtech Co., Ltd",
     "location": [],
-    "enrollment": ""
+    "enrollment": null
   },
   {
     "id": "NCT02378298",
@@ -488,20 +218,14 @@
       "Iv Methylprednisolone",
       "peroral methylprednisolone and Methotrexate"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2011-12",
     "completion_date": "2020-02-01",
     "sponsor": "G\u00f6teborg University",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06240234",
@@ -512,14 +236,14 @@
     "intervention": [
       "Capnodynamic method"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "NOT_YET_RECRUITING",
     "start_date": "2024-02",
     "completion_date": "2026-12",
     "sponsor": "Region Stockholm",
     "location": [],
-    "enrollment": ""
+    "enrollment": null
   },
   {
     "id": "NCT05872282",
@@ -530,18 +254,14 @@
     "intervention": [
       "ZIPPER aortic arch stentgraft system"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2023-04-28",
     "completion_date": "2025-04-28",
     "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
-    "location": [
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT07170332",
@@ -552,14 +272,14 @@
     "intervention": [
       "ZIPPER\u2122 Stent-Graft Trial for Aortic Arch Dissection"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "NOT_YET_RECRUITING",
     "start_date": "2025-09-30",
     "completion_date": "2032-09-30",
     "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
     "location": [],
-    "enrollment": ""
+    "enrollment": null
   },
   {
     "id": "NCT06945809",
@@ -572,14 +292,14 @@
       "WeFlow-EndoPatch Aortic Endovascular Patch System",
       "Conventional Treatment group"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "NOT_YET_RECRUITING",
     "start_date": "2025-10",
     "completion_date": "2032-10",
     "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
     "location": [],
-    "enrollment": ""
+    "enrollment": null
   },
   {
     "id": "NCT02620982",
@@ -591,16 +311,14 @@
     "intervention": [
       "ARIES (Extracorporal Shock Wave Application)"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2015-12",
     "completion_date": "2016-09",
     "sponsor": "Dornier MedTech Systems",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04765605",
@@ -611,44 +329,14 @@
     "intervention": [
       "WeFlow-Tbranch Stent Graft System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "ACTIVE_NOT_RECRUITING",
     "start_date": "2020-12-25",
     "completion_date": "2026-12-25",
     "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06158867",
@@ -659,16 +347,14 @@
     "intervention": [
       "FMD WK"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "COMPLETED",
     "start_date": "2023-11-24",
     "completion_date": "2024-01-31",
     "sponsor": "AcusMu Medtech Co., Ltd.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05107050",
@@ -680,16 +366,14 @@
       "Normal Saline and Amorphous gel",
       "BIAKOS\u2122 Antimicrobial Skin & Wound Cleanser, BIAK\u014cS Antimicrobial Wound Gel"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2021-12-01",
     "completion_date": "2023-05-25",
     "sponsor": "SerenaGroup, Inc.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT01794468",
@@ -701,16 +385,14 @@
     "intervention": [
       "Dermal blood flow measurements"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2003-06",
     "completion_date": "2005-07",
     "sponsor": "Rabin Medical Center",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05850013",
@@ -724,16 +406,14 @@
     "intervention": [
       "Lifelight Junior"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "COMPLETED",
     "start_date": "2023-05-01",
     "completion_date": "2024-04-01",
     "sponsor": "Xim Limited",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT01683474",
@@ -745,16 +425,14 @@
     "intervention": [
       "Venus MedTech Aortic Valve Prosthesis"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2012-09",
     "completion_date": "2016-04",
     "sponsor": "Venus MedTech (HangZhou) Inc.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05324787",
@@ -766,17 +444,14 @@
     "intervention": [
       "Grency venous stent system"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2019-08-22",
     "completion_date": "2021-12-09",
     "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
-    "location": [
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT03944447",
@@ -820,32 +495,14 @@
       "Cannabis, Medical",
       "RYAH-Medtech Inhaler"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2018-12-01",
     "completion_date": "2025-12-31",
     "sponsor": "OMNI Medical Services, LLC",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06325384",
@@ -857,16 +514,14 @@
       "Lifelight",
       "Blood Pressure Cuff"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2025-02-10",
     "completion_date": "2025-12-31",
     "sponsor": "Xim Limited",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05739058",
@@ -881,16 +536,14 @@
     "intervention": [
       "Violet-Blue Light Treatment / FlashHeal Device"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2023-03-22",
     "completion_date": "2024-05-01",
     "sponsor": "Bispebjerg Hospital",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05375110",
@@ -901,46 +554,14 @@
     "intervention": [
       "NoYA\u2122 Radiofrequency Interatrial Shunt System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2021-03-10",
     "completion_date": "2023-12-31",
     "sponsor": "Hangzhou NOYA MedTech Co. Ltm.",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06659796",
@@ -952,16 +573,14 @@
     "intervention": [
       "LifeVac"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "COMPLETED",
     "start_date": "2024-06-24",
     "completion_date": "2025-01-31",
     "sponsor": "LifeVac, LLC",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06259084",
@@ -972,16 +591,14 @@
     "intervention": [
       "Seedchrony"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2024-02-28",
     "completion_date": "2025-07-05",
     "sponsor": "Manina Medtech",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT01101971",
@@ -992,16 +609,14 @@
     "intervention": [
       "Pelvic exam video tutorial"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2010-04",
     "completion_date": "2010-05",
     "sponsor": "Queen's University",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04745546",
@@ -1012,16 +627,14 @@
     "intervention": [
       "WeFlow-JAAA Stent Graft System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2019-10-28",
     "completion_date": "2022-02-01",
     "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05060185",
@@ -1032,14 +645,14 @@
     "intervention": [
       "the Flow Diverter"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2021-10-17",
     "completion_date": "2024-05-31",
     "sponsor": "Jiangsu CED Medtech Co., Ltd",
     "location": [],
-    "enrollment": ""
+    "enrollment": null
   },
   {
     "id": "NCT07139912",
@@ -1050,16 +663,14 @@
     "intervention": [
       "Thoracic Aortic Multi-Branch Stent Graft System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "NOT_YET_RECRUITING",
     "start_date": "2025-09",
     "completion_date": "2032-03",
     "sponsor": "Shanghai MicroPort Endovascular MedTech\uff08Group\uff09Co., Ltd",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05434676",
@@ -1071,20 +682,14 @@
     "intervention": [
       "Shockwave Medical Peripheral Intravascular Lithotripsy (IVL) System M5 & S4"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2021-06-15",
     "completion_date": "2023-07-30",
     "sponsor": "Genesis Medtech Corporation",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04765592",
@@ -1095,38 +700,14 @@
     "intervention": [
       "WeFlow-Arch Modeler Embedded Branch Stent Graft System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "ACTIVE_NOT_RECRUITING",
     "start_date": "2021-06-07",
     "completion_date": "2029-02-05",
     "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06010563",
@@ -1138,16 +719,14 @@
       "Transcatheter pulmonary valve implantation (TPVI)",
       "VenusP-ValveTM System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2024-06-11",
     "completion_date": "2034-08-30",
     "sponsor": "Venus MedTech (HangZhou) Inc.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT07032948",
@@ -1160,14 +739,14 @@
     "intervention": [
       "FireMagic\u2122 PreciSense\u2122 3D Microelectrode Ablation Catheter\u3001EasyStars\u2122 High Density Mapping Catheter\u3001Columbus\u2122 3D EP Navigation System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "NOT_YET_RECRUITING",
     "start_date": "2025-08-31",
     "completion_date": "2025-08-31",
     "sponsor": "Shanghai MicroPort EP MedTech Co., Ltd.",
     "location": [],
-    "enrollment": ""
+    "enrollment": null
   },
   {
     "id": "NCT05399420",
@@ -1178,14 +757,14 @@
     "intervention": [
       "Blood sampling"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "UNKNOWN",
     "start_date": "2022-09-10",
     "completion_date": "2023-01-10",
     "sponsor": "CGenetix",
     "location": [],
-    "enrollment": ""
+    "enrollment": null
   },
   {
     "id": "NCT06969560",
@@ -1196,19 +775,14 @@
     "intervention": [
       "Remote Physiologic Monitoring (RPM)"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "RECRUITING",
     "start_date": "2025-02-24",
     "completion_date": "2028-12-31",
     "sponsor": "University of Alberta",
-    "location": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04528576",
@@ -1219,16 +793,14 @@
     "intervention": [
       "Dragonfly mitral valve repair system"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2020-07-23",
     "completion_date": "2023-12-31",
     "sponsor": "Hangzhou Valgen Medtech Co., Ltd",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05433376",
@@ -1240,18 +812,14 @@
     "intervention": [
       "Shockwave Coronary Intravascular Lithotripsy (IVL) System C2"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2021-04-15",
     "completion_date": "2022-11-26",
     "sponsor": "Genesis Medtech Corporation",
-    "location": [
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06062524",
@@ -1262,18 +830,14 @@
     "intervention": [
       "Aorta Vascular Plug System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2023-10-24",
     "completion_date": "2026-05-31",
     "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
-    "location": [
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT01661647",
@@ -1284,16 +848,14 @@
     "intervention": [
       "3D knee kinematic assessment under local anesthesia"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "NOT_YET_RECRUITING",
     "start_date": "2025-07-02",
     "completion_date": "2026-12-01",
     "sponsor": "Centre hospitalier de l'Universit\u00e9 de Montr\u00e9al (CHUM)",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05835349",
@@ -1304,25 +866,14 @@
     "intervention": [
       "transcatheter pulmonary valve implantation (TPVI)"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "RECRUITING",
     "start_date": "2024-08-26",
     "completion_date": "2032-12",
     "sponsor": "Venus MedTech (HangZhou) Inc.",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT02838004",
@@ -1334,16 +885,14 @@
     "intervention": [
       "IOL MINI WELL READY"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2016-08",
     "completion_date": "2017-10",
     "sponsor": "SIFI SpA",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05927441",
@@ -1354,14 +903,14 @@
     "intervention": [
       "DragonFly Transcatheter Mitral Valve Repair System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "NOT_YET_RECRUITING",
     "start_date": "2023-12-01",
     "completion_date": "2029-05-01",
     "sponsor": "Hangzhou Valgen Medtech Co., Ltd",
     "location": [],
-    "enrollment": ""
+    "enrollment": null
   },
   {
     "id": "NCT06535152",
@@ -1373,16 +922,14 @@
       "Lifelight",
       "Manual sphygmomanometer"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2023-05-18",
     "completion_date": "2023-08-03",
     "sponsor": "Xim Limited",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT03905057",
@@ -1394,16 +941,14 @@
       "Dornier Aries 2 (with active applicator)",
       "Dornier Aries 2 (with sham applicator)"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2018-03-26",
     "completion_date": "2021-06",
     "sponsor": "Dornier MedTech Systems",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06385379",
@@ -1414,35 +959,14 @@
     "intervention": [
       "WeFlow-Tribranch embedded aortic Triple-branch arch Stent Graft system"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2024-06-30",
     "completion_date": "2030-12-31",
     "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05991271",
@@ -1453,14 +977,14 @@
     "intervention": [
       "Venus-Vitae Transcatheter Heart Valve System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "NOT_YET_RECRUITING",
     "start_date": "2023-10-31",
     "completion_date": "2029-06-30",
     "sponsor": "Venus MedTech (HangZhou) Inc.",
     "location": [],
-    "enrollment": ""
+    "enrollment": null
   },
   {
     "id": "NCT04893603",
@@ -1471,16 +995,14 @@
     "intervention": [
       "Transcatheter Aortic Valve System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2020-12-16",
     "completion_date": "2026-12-31",
     "sponsor": "Chengdu Silara Meditech Inc.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT02590679",
@@ -1492,18 +1014,14 @@
     "intervention": [
       "Venues-P Valve"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2013-05",
     "completion_date": "2017-02",
     "sponsor": "Shanghai Zhongshan Hospital",
-    "location": [
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06559163",
@@ -1515,97 +1033,14 @@
       "Obexelimab",
       "Placebo"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2024-09-17",
     "completion_date": "2026-09",
     "sponsor": "Zenas BioPharma (USA), LLC",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04655742",
@@ -1616,19 +1051,14 @@
     "intervention": [
       "VitaFlow\u2122 Transcatheter Aortic Valve System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2014-06-27",
     "completion_date": "2021-12-31",
     "sponsor": "Shanghai MicroPort CardioFlow Medtech Co., Ltd.",
-    "location": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06514196",
@@ -1641,16 +1071,14 @@
     "intervention": [
       "Hintermann Series H3 Total Ankle Replacement System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "ACTIVE_NOT_RECRUITING",
     "start_date": "2020-06-18",
     "completion_date": "2025-01-20",
     "sponsor": "DT MedTech, LLC",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04764370",
@@ -1661,16 +1089,14 @@
     "intervention": [
       "WeFlow-Ach Moduler Embedded Branch Stent Graft System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2019-02-28",
     "completion_date": "2022-10-22",
     "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT01944553",
@@ -1681,16 +1107,14 @@
     "intervention": [
       "The ROSA\u2122 robot"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2013-09",
     "completion_date": "2014-02",
     "sponsor": "University Hospital, Montpellier",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04858230",
@@ -1705,16 +1129,14 @@
     "intervention": [
       "LymphoPilot"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "TERMINATED",
     "start_date": "2021-09-08",
     "completion_date": "2023-09-30",
     "sponsor": "Lymphatica Medtech SA",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05424653",
@@ -1725,14 +1147,14 @@
     "intervention": [
       "Transcatheter Aortic Valve System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2022-08-01",
     "completion_date": "2023-08-31",
     "sponsor": "Chengdu Silara Meditech Inc.",
     "location": [],
-    "enrollment": ""
+    "enrollment": null
   },
   {
     "id": "NCT05606367",
@@ -1744,16 +1166,14 @@
       "Non-slip Balloon Catheter of Shanghai MicroPort Rhythm",
       "NSE Coronary Dilatation Catheter"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2023-01-03",
     "completion_date": "2023-10",
     "sponsor": "Shanghai MicroPort Rhythm MedTech Co., Ltd.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05435001",
@@ -1764,16 +1184,14 @@
     "intervention": [
       "Holter ECG Monitoring"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2022-05-05",
     "completion_date": "2022-08-01",
     "sponsor": "Izmir Dr Suat Seren Chest Diseases and Surgery Education and Research Hospital",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05196633",
@@ -1789,16 +1207,14 @@
       "radial extracorporeal shock wave therapy",
       "sham radial extracorporeal shock wave therapy"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2021-01-01",
     "completion_date": "2021-08-31",
     "sponsor": "Carol Davila University of Medicine and Pharmacy",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06968364",
@@ -1810,29 +1226,14 @@
       "Cervisense Intravaginal Probe V0.1 cervical stiffness evaluation.",
       "Transvaginal ultrasound"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2025-05-10",
     "completion_date": "2027-04-01",
     "sponsor": "Ultrasound-Innovation Medtech, S.L.",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05519826",
@@ -1846,16 +1247,14 @@
     "intervention": [
       "Vascular surgery"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "COMPLETED",
     "start_date": "2022-03-01",
     "completion_date": "2022-04-20",
     "sponsor": "Perouse Medical",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06014996",
@@ -1868,25 +1267,14 @@
       "Pulsed Field Ablation (PFA) Therapy",
       "Radiofrequency Ablation\uff08RAF\uff09Therapy"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2023-09-04",
     "completion_date": "2025-07-03",
     "sponsor": "Insight Medtech Co., Ltd.",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT07082153",
@@ -1897,14 +1285,14 @@
     "intervention": [
       "the coronary sinus balloon pump"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "NOT_YET_RECRUITING",
     "start_date": "2025-08-12",
     "completion_date": "2026-03-03",
     "sponsor": "Shanghai MicroPort Rhythm MedTech Co., Ltd.",
     "location": [],
-    "enrollment": ""
+    "enrollment": null
   },
   {
     "id": "NCT05615493",
@@ -1916,16 +1304,14 @@
       "radial extracorporeal shock wave therapy",
       "sham radial extracorporeal shock wave therapy"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2022-10-15",
     "completion_date": "2023-03",
     "sponsor": "Doaa Waseem Nada",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04131959",
@@ -1938,23 +1324,14 @@
     "intervention": [
       "CytoSorb 300 mL device"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "TERMINATED",
     "start_date": "2019-10-29",
     "completion_date": "2021-05-04",
     "sponsor": "CytoSorbents, Inc",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05965271",
@@ -1965,22 +1342,14 @@
     "intervention": [
       "Fabulous Thoracic Aortic Stent System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "UNKNOWN",
     "start_date": "2023-08-01",
     "completion_date": "2024-01",
     "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05516043",
@@ -1995,18 +1364,14 @@
     "intervention": [
       "Implantation with POLYTHESE\u00ae"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "COMPLETED",
     "start_date": "2021-07-07",
     "completion_date": "2021-11-26",
     "sponsor": "Perouse Medical",
-    "location": [
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT01272830",
@@ -2021,16 +1386,14 @@
       "Placebo",
       "Apatone\u00aeB"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2010-10",
     "completion_date": "2015-12",
     "sponsor": "IC-MedTech Corporation",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05977257",
@@ -2042,19 +1405,14 @@
     "intervention": [
       "VitaFlow\u00ae Transcatheter Aortic Valve Replacement System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "NOT_YET_RECRUITING",
     "start_date": "2023-07-30",
     "completion_date": "2028-10-30",
     "sponsor": "Shanghai MicroPort CardioFlow Medtech Co., Ltd.",
-    "location": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05883592",
@@ -2065,17 +1423,14 @@
     "intervention": [
       "Fabulous Thoracic Aortic Stent System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "UNKNOWN",
     "start_date": "2023-05",
     "completion_date": "2024-05",
     "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
-    "location": [
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT03575039",
@@ -2086,14 +1441,14 @@
     "intervention": [
       "VitaFlow II Transcatheter Aortic Valve System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2018-08",
     "completion_date": "2024-12",
     "sponsor": "Shanghai MicroPort CardioFlow Medtech Co., Ltd.",
     "location": [],
-    "enrollment": ""
+    "enrollment": null
   },
   {
     "id": "NCT06784466",
@@ -2106,17 +1461,14 @@
     "intervention": [
       "Arg\u00e1 Medtech Coherent Sine-Burst Electroporation (CSE) Ablation System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2025-09-10",
     "completion_date": "2027-08",
     "sponsor": "Arga Medtech SA",
-    "location": [
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06573853",
@@ -2129,16 +1481,14 @@
       "Focal Pulsed Field Ablation (PFA)",
       "Focal Radiofrequecy Ablation (RFA)"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "RECRUITING",
     "start_date": "2022-10-11",
     "completion_date": "2025-06-30",
     "sponsor": "Caijie Shen",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06878404",
@@ -2151,170 +1501,14 @@
       "Placebo",
       "Active reference comparator"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2025-02-21",
     "completion_date": "2028-11-21",
     "sponsor": "Janssen Research & Development, LLC",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT07079813",
@@ -2328,14 +1522,14 @@
     "intervention": [
       "EasyStars\u2122 High Density Mapping Catheter"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "NOT_YET_RECRUITING",
     "start_date": "2025-08-30",
     "completion_date": "2027-12-31",
     "sponsor": "Shanghai MicroPort EP MedTech Co., Ltd.",
     "location": [],
-    "enrollment": ""
+    "enrollment": null
   },
   {
     "id": "NCT05607667",
@@ -2347,30 +1541,14 @@
     "intervention": [
       "Transcatheter aortic valve replacement"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2022-10-14",
     "completion_date": "2024-07-03",
     "sponsor": "Genesis Medtech Corporation",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04375618",
@@ -2382,16 +1560,14 @@
       "RhEGF",
       "Plain Collagen"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2019-10-01",
     "completion_date": "2021-11",
     "sponsor": "SVS Institute of Dental Sciences",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05946837",
@@ -2405,16 +1581,14 @@
       "NIRF-LI imaging",
       "Neuroglide pad"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2023-08-29",
     "completion_date": "2023-09-01",
     "sponsor": "The University of Texas Health Science Center, Houston",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06655428",
@@ -2429,22 +1603,14 @@
     "intervention": [
       "Endobronchial Therman Liquid Ablation (ETLA)"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2025-01-10",
     "completion_date": "2026-05",
     "sponsor": "Morair Medtech, LLC",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT03398915",
@@ -2461,28 +1627,14 @@
     "intervention": [
       "Transpedicular Instrumentation"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "UNKNOWN",
     "start_date": "2018-02-20",
     "completion_date": "2023-09-01",
     "sponsor": "Marc Schr\u00f6der",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04821115",
@@ -2495,19 +1647,14 @@
       "Low intensity choc waves therapy (active applicator)",
       "Sham (sham applicator)"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2021-04-06",
     "completion_date": "2024-05-24",
     "sponsor": "Hopital Foch",
-    "location": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04722796",
@@ -2520,33 +1667,14 @@
       "TAVR with Venus A plus using supra-annular sizing and THV implantation technique (Hangzhou solution)",
       "TAVR with Venus A plus using annular sizing and THV implantation technique"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2021-04-12",
     "completion_date": "2028-04-01",
     "sponsor": "Second Affiliated Hospital, School of Medicine, Zhejiang University",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04921605",
@@ -2557,16 +1685,14 @@
     "intervention": [
       "DragonFly transcatheter mitral valve clamping system"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2020-12-15",
     "completion_date": "2023-06-15",
     "sponsor": "Hangzhou Valgen Medtech Co., Ltd",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06535659",
@@ -2577,16 +1703,14 @@
     "intervention": [
       "VitaFlow Liberty\u2122 Transcatheter Aortic Valve System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "NOT_YET_RECRUITING",
     "start_date": "2024-12",
     "completion_date": "2032-06",
     "sponsor": "Shanghai MicroPort CardioFlow Medtech Co., Ltd.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06300268",
@@ -2599,14 +1723,14 @@
     "intervention": [
       "AdvaPro Sirolimus Eluting Coronary Stent System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "NOT_YET_RECRUITING",
     "start_date": "2024-06",
     "completion_date": "2026-12",
     "sponsor": "Advanced MedTech Solutions Pvt. Ltd.",
     "location": [],
-    "enrollment": ""
+    "enrollment": null
   },
   {
     "id": "NCT05179967",
@@ -2617,16 +1741,14 @@
     "intervention": [
       "WeFlow-JAAA Stent Graft System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2022-02-23",
     "completion_date": "2023-12-31",
     "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06910527",
@@ -2636,16 +1758,14 @@
       "Transplant Kidney"
     ],
     "intervention": [],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "RECRUITING",
     "start_date": "2024-05-30",
     "completion_date": "2026-05-31",
     "sponsor": "Poulet Geoffroy",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06721975",
@@ -2658,16 +1778,14 @@
       "Thulio pulsed Thulium:YAG (p-Tm:YAG)",
       "Thulium Laser Fiber (TFL)"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2024-08-01",
     "completion_date": "2026-12-31",
     "sponsor": "University of California, San Diego",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05556460",
@@ -2679,17 +1797,14 @@
       "DragonFly-T Transcatheter Tricuspid Valve Repair System",
       "Medical therapy"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2024-08-15",
     "completion_date": "2027-12-15",
     "sponsor": "Hangzhou Valgen Medtech Co., Ltd",
-    "location": [
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT03884803",
@@ -2701,16 +1816,14 @@
       "E-health website",
       "Standard Care"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2019-04-08",
     "completion_date": "2021-05",
     "sponsor": "McGill University",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05818098",
@@ -2721,16 +1834,14 @@
     "intervention": [
       "Intravascular Lithotripsy System of Shanghai MicroPort Rhythm"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2023-03-29",
     "completion_date": "2024-03",
     "sponsor": "Shanghai MicroPort Rhythm MedTech Co., Ltd.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05398991",
@@ -2741,16 +1852,14 @@
     "intervention": [
       "the Coronary Covered Stents System manufactured by Shanghai MicroPort Medical (Group) Co., Ltd."
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2022-10-26",
     "completion_date": "2025-07",
     "sponsor": "Shanghai MicroPort Rhythm MedTech Co., Ltd.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT01418079",
@@ -2761,16 +1870,14 @@
     "intervention": [
       "O2 MedTech cerebral oximeter (Oxygen desaturation)"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2011-08",
     "completion_date": "2012-02",
     "sponsor": "O2 MedTech, Inc.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04414865",
@@ -2781,17 +1888,14 @@
     "intervention": [
       "VitaFlow\u2122 Transcatheter Aortic Valve System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "RECRUITING",
     "start_date": "2020-04-26",
     "completion_date": "2027-12-30",
     "sponsor": "Shanghai MicroPort CardioFlow Medtech Co., Ltd.",
-    "location": [
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04733404",
@@ -2802,16 +1906,14 @@
     "intervention": [
       "Dragonfly Transcatheter Mitral Valve Repair System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2022-03-12",
     "completion_date": "2027-09-30",
     "sponsor": "Hangzhou Valgen Medtech Co., Ltd",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04061837",
@@ -2822,16 +1924,14 @@
     "intervention": [
       "MitralStitch"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2019-08-23",
     "completion_date": "2021-10-31",
     "sponsor": "Xijing Hospital",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06386458",
@@ -2844,19 +1944,14 @@
       "AThrough radiofrequency transseptal puncture system",
       "Traditional mechanical transseptal puncture needle"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2022-07-08",
     "completion_date": "2023-05-11",
     "sponsor": "Hangzhou NOYA MedTech Co. Ltm.",
-    "location": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT03628222",
@@ -2868,23 +1963,14 @@
       "ENB-TBLB",
       "X-ray-TBLB"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2019-01-04",
     "completion_date": "2020-08-10",
     "sponsor": "Changzhou LungHealth Medtech Company Limited",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT01844102",
@@ -2895,16 +1981,14 @@
     "intervention": [
       "PrePex"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2013-10",
     "completion_date": "2014-04",
     "sponsor": "FHI 360",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05447585",
@@ -2916,16 +2000,14 @@
       "Coronary atherectomy system of Shanghai MicroPort Rhythm",
       "Rotablator Rotational Atherectomy System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2022-07-01",
     "completion_date": "2024-12-10",
     "sponsor": "Shanghai MicroPort Rhythm MedTech Co., Ltd.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT07039032",
@@ -2936,16 +2018,14 @@
     "intervention": [
       "FireMagic\u2122 Magbot Ablation Catheter \u3001FireMagic\u2122 TrueForce\u2122 Ablation Catheter"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "NOT_YET_RECRUITING",
     "start_date": "2025-09-30",
     "completion_date": "2028-12-31",
     "sponsor": "Shanghai MicroPort EP MedTech Co., Ltd.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06917248",
@@ -2955,17 +2035,14 @@
       "Hemorrhagic Strokes"
     ],
     "intervention": [],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "COMPLETED",
     "start_date": "2024-05-21",
     "completion_date": "2024-10-07",
     "sponsor": "Keuro MedTech",
-    "location": [
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05874206",
@@ -2978,16 +2055,14 @@
     "intervention": [
       "Cratos\u2122 Stent Graft"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2024-03-08",
     "completion_date": "2031-12",
     "sponsor": "Shanghai MicroPort Endovascular MedTech\uff08Group\uff09Co., Ltd",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06368037",
@@ -2998,16 +2073,14 @@
     "intervention": [
       "DragonFire Transcatheter Myocardial Radiofrequency Ablation System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "NOT_YET_RECRUITING",
     "start_date": "2024-08",
     "completion_date": "2026-06",
     "sponsor": "Hangzhou Valgen Medtech Co., Ltd",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06290661",
@@ -3021,16 +2094,14 @@
       "Active electrostimulation",
       "Placebo electrostimulation"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2023-02-09",
     "completion_date": "2026-12-30",
     "sponsor": "Union Hospital, Tongji Medical College, Huazhong University of Science and Technology",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT03039218",
@@ -3042,19 +2113,14 @@
       "Dornier Aries 2",
       "Placebo / Sham"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "TERMINATED",
     "start_date": "2017-02-07",
     "completion_date": "2018-03-29",
     "sponsor": "Dornier MedTech Systems",
-    "location": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06494956",
@@ -3065,14 +2131,14 @@
     "intervention": [
       "Implant device"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "NOT_YET_RECRUITING",
     "start_date": "2024-07-01",
     "completion_date": "2025-07-31",
     "sponsor": "Jiangsu CED Medtech Co., Ltd",
     "location": [],
-    "enrollment": ""
+    "enrollment": null
   },
   {
     "id": "NCT00894478",
@@ -3085,16 +2151,14 @@
       "Diffusion Tensor Imaging (DTI)",
       "Magnetoencephalography"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "COMPLETED",
     "start_date": "2009-05",
     "completion_date": "2012-05",
     "sponsor": "The Hospital for Sick Children",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04575480",
@@ -3105,16 +2169,14 @@
     "intervention": [
       "Shock Wave Lithotripsy for renal stone."
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2020-07-15",
     "completion_date": "2023-01-01",
     "sponsor": "Mansoura University",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05572047",
@@ -3125,18 +2187,14 @@
     "intervention": [
       "Arga Medtech Coherent Sine-Burst Electroporation (CSE) Ablation System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2022-10-11",
     "completion_date": "2026-06",
     "sponsor": "Arga Medtech SA",
-    "location": [
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05727709",
@@ -3148,20 +2206,14 @@
       "Immunosuppression"
     ],
     "intervention": [],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "UNKNOWN",
     "start_date": "2023-03-15",
     "completion_date": "2024-06-30",
     "sponsor": "Tongji Hospital",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05941455",
@@ -3173,16 +2225,14 @@
     "intervention": [
       "Venus-Neo Surgical Aortic Valve"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "NOT_YET_RECRUITING",
     "start_date": "2023-10-31",
     "completion_date": "2029-10-31",
     "sponsor": "Jilin Venus Haoyue Medtech Limited",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05519761",
@@ -3200,18 +2250,14 @@
     "intervention": [
       "Implantation of veinous access ports"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "UNKNOWN",
     "start_date": "2022-03-15",
     "completion_date": "2022-10-30",
     "sponsor": "Perouse Medical",
-    "location": [
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT07067372",
@@ -3224,16 +2270,14 @@
     "intervention": [
       "FireMagic\u2122 Magbot Ablation Catheter"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "NOT_YET_RECRUITING",
     "start_date": "2025-12-31",
     "completion_date": "2028-12-31",
     "sponsor": "Shanghai MicroPort EP MedTech Co., Ltd.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05671640",
@@ -3244,16 +2288,14 @@
     "intervention": [
       "DragonFly-T Transcatheter Tricuspid Valve Repair System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2022-10-27",
     "completion_date": "2024-01-10",
     "sponsor": "Hangzhou Valgen Medtech Co., Ltd",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT07036068",
@@ -3264,16 +2306,14 @@
     "intervention": [
       "IceMagic\u2122 CryoAblation Catheter"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "NOT_YET_RECRUITING",
     "start_date": "2025-08-31",
     "completion_date": "2027-12-31",
     "sponsor": "Shanghai MicroPort EP MedTech Co., Ltd.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT02166541",
@@ -3286,16 +2326,14 @@
       "Traditional spinal manipulation",
       "INRS"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2014-01",
     "completion_date": "2016-12",
     "sponsor": "Karolinska Institutet",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04644835",
@@ -3307,16 +2345,14 @@
       "Low Energy Shock Wave Treatment",
       "Sham Treatment"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2020-11-28",
     "completion_date": "2023-11-28",
     "sponsor": "Mansoura University",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04080362",
@@ -3327,16 +2363,14 @@
     "intervention": [
       "MitralStitch"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2019-07-05",
     "completion_date": "2022-06-01",
     "sponsor": "Hangzhou Valgen Medtech Co., Ltd",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05608655",
@@ -3349,29 +2383,14 @@
       "DKutting LL balloon",
       "Chocolate balloon"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2022-12-27",
     "completion_date": "2024-02-04",
     "sponsor": "DK Medical Technology (Suzhou) Co., Ltd.",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05929313",
@@ -3383,19 +2402,14 @@
       "OrbusNeich Scoreflex TRIO",
       "OrbusNeich Scoreflex NC"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2023-04-27",
     "completion_date": "2024-05-29",
     "sponsor": "OrbusNeich",
-    "location": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05523596",
@@ -3407,18 +2421,14 @@
       "ICM20",
       "Benznidazole"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "ACTIVE_NOT_RECRUITING",
     "start_date": "2022-12-20",
     "completion_date": "2027-03",
     "sponsor": "IC-MedTech Corporation",
-    "location": [
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06076850",
@@ -3430,16 +2440,14 @@
       "Low-Intensity Extracorporeal Shockwave Therapy (LiEWST) - Active",
       "Low-Intensity Extracorporeal Shockwave Therapy (LiEWST) - Sham"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2023-07-01",
     "completion_date": "2025-06-30",
     "sponsor": "Hospital Pengajar Universiti Putra Malaysia",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04643743",
@@ -3453,16 +2461,14 @@
     "intervention": [
       "Endarterectomy"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "COMPLETED",
     "start_date": "2020-09-01",
     "completion_date": "2022-06-10",
     "sponsor": "Perouse Medical",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05820035",
@@ -3475,16 +2481,14 @@
     "intervention": [
       "Pulsed Field Ablation Device and CF-Sensing Pulsed Field Ablation Catheter"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2023-03-09",
     "completion_date": "2024-12-09",
     "sponsor": "Shanghai MicroPort EP MedTech Co., Ltd.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT01674816",
@@ -3500,16 +2504,14 @@
       "Repeated Measurements of Knee Alignment and Kinematics",
       "Computer Guidance of Surgical Actions"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "NOT_YET_RECRUITING",
     "start_date": "2025-12-01",
     "completion_date": "2026-12-01",
     "sponsor": "Centre hospitalier de l'Universit\u00e9 de Montr\u00e9al (CHUM)",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04770870",
@@ -3522,25 +2524,14 @@
     "intervention": [
       "Hintermann Series H3 Total Ankle Replacement System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2022-02-01",
     "completion_date": "2029-04",
     "sponsor": "DT MedTech, LLC",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05754541",
@@ -3551,19 +2542,14 @@
     "intervention": [
       "WeFlow-Tribranch Aortic Arch Stent Graft System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2022-11-10",
     "completion_date": "2025-12-31",
     "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
-    "location": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04589923",
@@ -3577,16 +2563,14 @@
       "Lifelight\u00ae Data Collect Blood Pressure Group",
       "Lifelight\u00ae Data Collect Oxygen Saturation Group"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "COMPLETED",
     "start_date": "2020-09-14",
     "completion_date": "2022-05-07",
     "sponsor": "Xim Limited",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06597188",
@@ -3599,16 +2583,14 @@
       "VitaFlow Liberty",
       "Commercially available surgical bioprosthetic valve"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "ENROLLING_BY_INVITATION",
     "start_date": "2025-09-08",
     "completion_date": "2032-09-30",
     "sponsor": "Shanghai MicroPort CardioFlow Medtech Co., Ltd.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT07086742",
@@ -3621,16 +2603,14 @@
     "intervention": [
       "Smart Mask V1 System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2025-09-01",
     "completion_date": "2025-12-31",
     "sponsor": "Pathway Medtech, LLC.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT01711411",
@@ -3641,16 +2621,14 @@
     "intervention": [
       "PrePex device for male circumcision"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "COMPLETED",
     "start_date": "2012-11",
     "completion_date": "2013-09",
     "sponsor": "FHI 360",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04414878",
@@ -3661,19 +2639,14 @@
     "intervention": [
       "VitaFlow\u2122 II Transcatheter Aortic Valve System"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2018-01-31",
     "completion_date": "2027-01-31",
     "sponsor": "Shanghai MicroPort CardioFlow Medtech Co., Ltd.",
-    "location": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05580952",
@@ -3685,30 +2658,14 @@
     "intervention": [
       "Transcatheter aortic valve replacement"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2022-10-14",
     "completion_date": "2024-05-01",
     "sponsor": "Genesis Medtech Corporation",
-    "location": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05813704",
@@ -3719,16 +2676,14 @@
     "intervention": [
       "Coronary Crossing System of Shanghai MicroPort Rhythm"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "RECRUITING",
     "start_date": "2023-11-07",
     "completion_date": "2025-05",
     "sponsor": "Shanghai MicroPort Rhythm MedTech Co., Ltd.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT06232798",
@@ -3740,16 +2695,14 @@
       "a dual energy catheter (RF and PFA) or PFA catheter only will be to treat PeAF,Cardiac Pulsed Electric Field Ablation Catheter",
       "catheter ablation"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2024-01-11",
     "completion_date": "2025-04-30",
     "sponsor": "Shanghai MicroPort EP MedTech Co., Ltd.",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT04292210",
@@ -3764,16 +2717,14 @@
     "intervention": [
       "Perisafe"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "COMPLETED",
     "start_date": "2018-02-19",
     "completion_date": "2018-04-30",
     "sponsor": "Peripal AG",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT05517876",
@@ -3789,16 +2740,14 @@
     "intervention": [
       "Vascular abdominal or peripheral surgery"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "COMPLETED",
     "start_date": "2021-07-01",
     "completion_date": "2021-09-30",
     "sponsor": "Perouse Medical",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   },
   {
     "id": "NCT02846753",
@@ -3809,14 +2758,14 @@
     "intervention": [
       "trans catheter heart valve replacement"
     ],
-    "phase": "",
+    "phase": null,
     "type": "INTERVENTIONAL",
     "status": "UNKNOWN",
     "start_date": "2016-08-17",
     "completion_date": "2024-12-31",
     "sponsor": "Venus MedTech (HangZhou) Inc.",
     "location": [],
-    "enrollment": ""
+    "enrollment": null
   },
   {
     "id": "NCT07021612",
@@ -3828,15 +2777,13 @@
       "JenaValve",
       "J-Valve"
     ],
-    "phase": "",
+    "phase": null,
     "type": "OBSERVATIONAL",
     "status": "RECRUITING",
     "start_date": "2025-04-01",
     "completion_date": "2028-09-30",
     "sponsor": "Prince of Wales Hospital, Shatin, Hong Kong",
-    "location": [
-      ""
-    ],
-    "enrollment": ""
+    "location": [],
+    "enrollment": null
   }
 ]
