@@ -27,21 +27,23 @@ def fetch_trials(keyword="medtech", max_records=500):
         if page_token:
             params["pageToken"] = page_token
 
-        response = requests.get("https://clinicaltrials.gov/api/v2/studies", params=params)
-
-        if response.status_code != 200:
-            print(f"❌ API returned status {response.status_code}")
-            break
-
         try:
-            data = response.json()
-        except requests.exceptions.JSONDecodeError:
-            print("❌ Failed to decode JSON from API response")
+            response = requests.get("https://clinicaltrials.gov/api/v2/studies", params=params)
+            response.raise_for_status()  # Raises HTTPError for bad status codes
+
+            try:
+                data = response.json()
+            except requests.exceptions.JSONDecodeError:
+                print("❌ JSON decode failed. Response content:")
+                print(response.text[:500])  # Show first 500 characters
+                break
+
+        except requests.exceptions.RequestException as e:
+            print(f"❌ Request failed: {e}")
             break
 
         studies = data.get("studies", [])
-        # ... continue parsing trials as before ...
-
+        # Continue parsing trials...
         fetched += len(studies)
         page_token = data.get("nextPageToken")
         if not page_token:
