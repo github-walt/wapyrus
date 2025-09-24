@@ -2,6 +2,10 @@
 import streamlit as st
 import json
 import os
+# Add charts
+import pandas as pd
+import plotly.express as px
+
 from datetime import datetime
 from llm_interface import ask_roo
 from scrape_trials import fetch_trials, save_to_json
@@ -181,6 +185,15 @@ if signals:
     # Show filtered count
     if selected_type != "All":
         st.write(f"**Filtered to {len(filtered_signals)} {selected_type} trials**")
+        
+    # Convert to DataFrame for easier analysis
+    df = pd.DataFrame(signals)
+    st.subheader("📈 Trial Analytics")
+
+# Status distribution
+status_counts = df['status'].value_counts()
+fig = px.pie(values=status_counts.values, names=status_counts.index)
+st.plotly_chart(fig)
     
     # SIMPLE DATA DISPLAY - Always show something
     with st.expander("📋 View All Trial Data", expanded=True):
