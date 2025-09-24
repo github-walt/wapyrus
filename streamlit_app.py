@@ -4,7 +4,7 @@ import json
 import os
 # Add charts
 import pandas as pd
-import plotly.express as px
+
 
 from datetime import datetime
 from llm_interface import ask_roo
@@ -186,14 +186,7 @@ if signals:
     if selected_type != "All":
         st.write(f"**Filtered to {len(filtered_signals)} {selected_type} trials**")
         
-    # Convert to DataFrame for easier analysis
-    df = pd.DataFrame(signals)
-    st.subheader("📈 Trial Analytics")
-
-    # Status distribution
-    status_counts = df['status'].value_counts()
-    fig = px.pie(values=status_counts.values, names=status_counts.index)
-    st.plotly_chart(fig)
+    
     
     # SIMPLE DATA DISPLAY - Always show something
     with st.expander("📋 View All Trial Data", expanded=True):
@@ -220,6 +213,48 @@ if signals:
                 st.info(f"Showing first 10 of {len(signals)} total trials")
 else:
     st.error("❌ No clinical trial data available. Click the 'Refresh Clinical Trials' button to fetch data.")
+    
+    # Add this after your data display section
+st.header("📊 Trial Analytics Dashboard")
+
+if signals:
+    import pandas as pd
+    
+    # Convert to DataFrame
+    df = pd.DataFrame(signals)
+    
+    # Create columns for different charts
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.subheader("Trial Status")
+        status_counts = df['status'].value_counts()
+        st.dataframe(status_counts, use_container_width=True)
+        st.bar_chart(status_counts)
+    
+    with col2:
+        st.subheader("Trial Types")
+        type_counts = df['type'].value_counts()
+        st.dataframe(type_counts, use_container_width=True)
+        st.bar_chart(type_counts)
+    
+    # Timeline analysis (if you have dates)
+    st.subheader("Trial Timeline")
+    if 'start_date' in df.columns:
+        # Extract year from start_date
+        df['year'] = pd.to_datetime(df['start_date'], errors='coerce').dt.year
+        yearly_counts = df['year'].value_counts().sort_index()
+        st.line_chart(yearly_counts)
+    else:
+        st.info("No date data available for timeline")
+    
+    # Top sponsors table
+    st.subheader("Top 10 Sponsors")
+    top_sponsors = df['sponsor'].value_counts().head(10)
+    st.dataframe(top_sponsors, use_container_width=True)
+
+else:
+    st.info("No data available for analytics")
 
 
 # Footer
