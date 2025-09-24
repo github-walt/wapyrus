@@ -82,6 +82,18 @@ with st.sidebar:
                     st.error("❌ No trials were fetched. API might be unavailable.")
             except Exception as e:
                 st.error(f"❌ Failed to fetch trials: {str(e)}")
+    # Add to sidebar
+    st.sidebar.subheader("Advanced Filters")
+    status_filter = st.sidebar.multiselect(
+        "Trial Status:",
+        ["RECRUITING", "COMPLETED", "ACTIVE_NOT_RECRUITING", "UNKNOWN"]
+        )
+
+    # Date range filter
+    date_range = st.sidebar.date_input(
+        "Start Date Range:",
+        value=(datetime(2023, 1, 1), datetime.now())
+        )
     
     # Show last update
     if st.session_state.last_update:
