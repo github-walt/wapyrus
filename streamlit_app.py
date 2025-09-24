@@ -84,7 +84,19 @@ with st.sidebar:
     if st.button("🔄 Refresh Clinical Trials", type="primary"):
         with st.spinner("Fetching latest clinical trials..."):
             try:
-                new_trials = fetch_trials(max_records=int(max_fetch))
+                # Pass the 'medtech' keyword directly to the function
+                new_trials = fetch_trials(keyword="medtech", max_records=int(max_fetch))
+                
+                if new_trials:
+                    # Save the new data and update the app state
+                    save_to_json(new_trials, "knowledge_base.json")
+                    st.session_state.signals = new_trials
+                    st.session_state.last_update = datetime.now()
+                    st.success(f"✅ Fetched {len(new_trials)} trials!")
+                else:
+                    st.error("❌ No trials were fetched. API might be unavailable.")
+            except Exception as e:
+                st.error(f"❌ Failed to fetch trials: {str(e)}")
   # Start small
                 if new_trials:
                     save_to_json(new_trials, "knowledge_base.json")
