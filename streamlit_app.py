@@ -195,8 +195,7 @@ if signals:
                 st.info(f"Showing first 10 of {len(signals)} total trials")
 else:
     st.error("❌ No clinical trial data available. Click the 'Refresh Clinical Trials' button to fetch data.")
-else:
-    st.error("❌ No clinical trial data available. Click the 'Refresh Clinical Trials' button in the sidebar to fetch data.")
+
 
 # Footer
 st.markdown("---")
