@@ -190,10 +190,10 @@ if signals:
     df = pd.DataFrame(signals)
     st.subheader("📈 Trial Analytics")
 
-# Status distribution
-status_counts = df['status'].value_counts()
-fig = px.pie(values=status_counts.values, names=status_counts.index)
-st.plotly_chart(fig)
+    # Status distribution
+    status_counts = df['status'].value_counts()
+    fig = px.pie(values=status_counts.values, names=status_counts.index)
+    st.plotly_chart(fig)
     
     # SIMPLE DATA DISPLAY - Always show something
     with st.expander("📋 View All Trial Data", expanded=True):
