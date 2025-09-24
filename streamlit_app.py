@@ -189,7 +189,7 @@ if signals:
     
     
     # SIMPLE DATA DISPLAY - Always show something
-    with st.expander("📋 View All Trial Data", expanded=True):
+    with st.expander("📋 View All Trial Data"):
         if filtered_signals:
             # Show as a simple list first
             for i, trial in enumerate(filtered_signals):
