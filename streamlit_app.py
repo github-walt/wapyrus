@@ -72,11 +72,19 @@ st.markdown("Ask Roo anything about recent MedTech signals.")
 with st.sidebar:
     st.header("Controls")
     
+    max_fetch = st.number_input(
+    "Clinical trials to fetch:",
+    min_value=10,    # smallest allowed
+    max_value=1000,  # largest allowed
+    value=50,        # default value shown
+    step=10
+)  
     # Refresh button with better error handling
     if st.button("🔄 Refresh Clinical Trials", type="primary"):
         with st.spinner("Fetching latest clinical trials..."):
             try:
-                new_trials = fetch_trials(max_records=50)  # Start small
+                new_trials = fetch_trials(max_records=int(max_fetch))
+  # Start small
                 if new_trials:
                     save_to_json(new_trials, "knowledge_base.json")
                     st.session_state.signals = new_trials
