@@ -4,7 +4,7 @@ import json
 import os
 # Add charts
 import pandas as pd
-import plotly.express as px
+
 
 from datetime import datetime
 from llm_interface import ask_roo
