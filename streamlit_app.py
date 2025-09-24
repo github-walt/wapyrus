@@ -88,7 +88,7 @@ with st.sidebar:
     only_with_results = st.checkbox("Only Studies With Results")
     date_field = st.selectbox("Date Field", ["Start Date", "Completion Date", "Last Update"])
     # Use these in your fetch_trials logic!  
-)    
+   
     # Refresh button with better error handling
     if st.button("🔄 Refresh Clinical Trials", type="primary"):
         with st.spinner("Fetching latest clinical trials..."):
