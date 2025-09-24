@@ -1,0 +1,3318 @@
+--------------------------------------------------
+File: app.py
+--------------------------------------------------
+import json
+from llm_interface import ask_roo
+
+def load_signals(file_path="knowledge_base.json"):
+    with open(file_path, "r") as f:
+        return json.load(f)
+
+def main():
+    print("👋 Welcome to Wapyrus — your MedTech Signal Explorer!")
+    signals = load_signals()
+
+    while True:
+        query = input("\nAsk Roo a question (or type 'exit' to quit):\n> ")
+        if query.lower() in ["exit", "quit"]:
+            print("👋 Goodbye!")
+            break
+
+        response = ask_roo(query, signals)
+        print(f"\n🧠 Roo says:\n{response}")
+
+if __name__ == "__main__":
+    main()
+
+
+
+--------------------------------------------------
+File: cache_utils.py
+--------------------------------------------------
+# cache_utils.py
+from functools import lru_cache
+import hashlib
+import json
+from datetime import datetime, timedelta
+
+@lru_cache(maxsize=100)
+def load_signals_cached(file_path="knowledge_base.json"):
+    """Cache the signals data to avoid repeated file reads"""
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
+
+def get_query_hash(query, signals_count):
+    """Create hash for caching based on query and data state"""
+    return hashlib.md5(f"{query}_{signals_count}".encode()).hexdigest()
+
+# Cache for API responses (optional enhancement)
+api_cache = {}
+CACHE_DURATION = timedelta(hours=1)
+
+def get_cached_api_response(cache_key):
+    """Get cached API response if still valid"""
+    if cache_key in api_cache:
+        data, timestamp = api_cache[cache_key]
+        if datetime.now() - timestamp < CACHE_DURATION:
+            return data
+    return None
+
+def set_cached_api_response(cache_key, data):
+    """Cache API response with timestamp"""
+    api_cache[cache_key] = (data, datetime.now())
+
+
+--------------------------------------------------
+File: knowledge_base.json
+--------------------------------------------------
+[
+  {
+    "id": "NCT06211595",
+    "title": "Feasibility Study of the DragonFire for Hypertrophic Obstructive Cardiomyopathy",
+    "condition": [
+      "Obstructive Hypertrophic Cardiomyopathy"
+    ],
+    "intervention": [
+      "DragonFire Transcatheter Myocardial Radiofrequency Ablation System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "start_date": "2022-10-13",
+    "completion_date": "2024-11-30",
+    "sponsor": "Hangzhou Valgen Medtech Co., Ltd",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05519787",
+    "title": "A Retrospective, Observational, Monocenter, Study to Describe the Utilization and Overall Safety and Performance of POLYSITE\u00ae/SEESITE\u00ae Implantable Ports",
+    "condition": [
+      "Venous System",
+      "Venous Access",
+      "Chemotherapy",
+      "Antibiotics",
+      "Antiviral",
+      "Parenteral Nutrition",
+      "Transfusion Blood"
+    ],
+    "intervention": [
+      "Central Veinous access devices' insertion"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "COMPLETED",
+    "start_date": "2021-12-14",
+    "completion_date": "2022-05-19",
+    "sponsor": "Perouse Medical",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04918212",
+    "title": "Safety and Efficacy Study of Fabulous Stent Graft System for Stanford B Aortic Dissection",
+    "condition": [
+      "Aortic Dissection Type B"
+    ],
+    "intervention": [
+      "Fabulous Stent Graft System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2017-11-25",
+    "completion_date": "2020-10-13",
+    "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT02071654",
+    "title": "Efficacy and Safety of Venus P-valve to Treat RVOT Stenosis With Pulmonary Regurgitation",
+    "condition": [
+      "Right Ventricular Outflow Tract Stenosis"
+    ],
+    "intervention": [
+      "Venus P-valve transcatheter implantation"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2014-02",
+    "completion_date": "2016-02",
+    "sponsor": "Venus MedTech (HangZhou) Inc.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04734756",
+    "title": "Safety and Effectiveness Study of Dragonfly System for Degenerative Mitral Regurgitation",
+    "condition": [
+      "Degenerative Mitral Valve Disease"
+    ],
+    "intervention": [
+      "Dragonfly Transcatheter Mitral Valve Repair System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "ENROLLING_BY_INVITATION",
+    "start_date": "2021-05-04",
+    "completion_date": "2027-05-31",
+    "sponsor": "Hangzhou Valgen Medtech Co., Ltd",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04745039",
+    "title": "Guo's Entry Tear Repair :The First in Man Study of Endopatch System",
+    "condition": [
+      "Chronic Stanford B Type Aortic Dissection Proximal Tear"
+    ],
+    "intervention": [
+      "Endopatch System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2021-04-15",
+    "completion_date": "2023-12-15",
+    "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT07136272",
+    "title": "Detection of Sleep Stages and Arousals Using Neural Network Classifiers",
+    "condition": [
+      "Sleep Disordered Breathing (SDB)",
+      "Sleep Apnea"
+    ],
+    "intervention": [
+      "SSAM",
+      "Polysomnography",
+      "EnsoSleep"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "NOT_YET_RECRUITING",
+    "start_date": "2025-09",
+    "completion_date": "2025-12",
+    "sponsor": "Pathway Medtech, LLC.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06445023",
+    "title": "A Phase 3 Study of Barzolvolimab in Participants With Chronic Spontaneous Urticaria",
+    "condition": [
+      "Chronic Spontaneous Urticaria"
+    ],
+    "intervention": [
+      "barzolvolimab",
+      "Matching placebo"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2024-07-11",
+    "completion_date": "2027-04",
+    "sponsor": "Celldex Therapeutics",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT01807260",
+    "title": "Stepwise Shock Wave Lithotripsy in Pediatric Urolithiasis",
+    "condition": [
+      "Pediatric Urinary Lithiasis"
+    ],
+    "intervention": [
+      "Shock wave lithotripsy"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2008-03",
+    "completion_date": "2012-06",
+    "sponsor": "TC Erciyes University",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04617899",
+    "title": "The StUdy to Evaluate the Performance and safEty of the Novasight HybRid System Using Objective PeRformance Criteria",
+    "condition": [
+      "Coronary Artery Disease"
+    ],
+    "intervention": [
+      "Intravascular imaging"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2021-03-17",
+    "completion_date": "2021-12-31",
+    "sponsor": "CardioNavi MedTech (Wuhan) Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06485492",
+    "title": "Aneurysm Embolization System for Intracranial Aneurysms",
+    "condition": [
+      "Ruptured Cerebral Aneurysm"
+    ],
+    "intervention": [
+      "Implant an aneurysm embolization system"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "NOT_YET_RECRUITING",
+    "start_date": "2024-08-01",
+    "completion_date": "2026-07-31",
+    "sponsor": "Jiangsu CED Medtech Co., Ltd",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT02378298",
+    "title": "Rituximab (RTX) Therapy in Patients With Active TAO",
+    "condition": [
+      "Ophthalmopathy, Thyroid-Associated"
+    ],
+    "intervention": [
+      "Rituximab",
+      "Iv Methylprednisolone",
+      "peroral methylprednisolone and Methotrexate"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2011-12",
+    "completion_date": "2020-02-01",
+    "sponsor": "G\u00f6teborg University",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06240234",
+    "title": "Artificial Intelligence - to Predict and Prevent Hypotension During Surgery",
+    "condition": [
+      "Monitoring, Intraoperative"
+    ],
+    "intervention": [
+      "Capnodynamic method"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "NOT_YET_RECRUITING",
+    "start_date": "2024-02",
+    "completion_date": "2026-12",
+    "sponsor": "Region Stockholm",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05872282",
+    "title": "Percutaneous Endovascular Arch Repair Trial (PEART) Study",
+    "condition": [
+      "Aortic Diseases"
+    ],
+    "intervention": [
+      "ZIPPER aortic arch stentgraft system"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2023-04-28",
+    "completion_date": "2025-04-28",
+    "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT07170332",
+    "title": "ZIPPER\u2122 Stent-Graft Trial for Aortic Arch Dissection",
+    "condition": [
+      "Dissection of Aortic Arch"
+    ],
+    "intervention": [
+      "ZIPPER\u2122 Stent-Graft Trial for Aortic Arch Dissection"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "NOT_YET_RECRUITING",
+    "start_date": "2025-09-30",
+    "completion_date": "2032-09-30",
+    "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06945809",
+    "title": "Guo&Amp;'s Distal Entry Tear Repair With WeFlow-EndoPatch System (Gallant Study)",
+    "condition": [
+      "Aortic Dissection",
+      "Distal Entry Tear"
+    ],
+    "intervention": [
+      "WeFlow-EndoPatch Aortic Endovascular Patch System",
+      "Conventional Treatment group"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "NOT_YET_RECRUITING",
+    "start_date": "2025-10",
+    "completion_date": "2032-10",
+    "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT02620982",
+    "title": "ARIES for Vasculogenic Erectile Dysfunction",
+    "condition": [
+      "Erectile Dysfunction",
+      "Sexual Dysfunction, Physiological"
+    ],
+    "intervention": [
+      "ARIES (Extracorporal Shock Wave Application)"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2015-12",
+    "completion_date": "2016-09",
+    "sponsor": "Dornier MedTech Systems",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04765605",
+    "title": "Guo's Subclavian Artery Reconstruction: The Prospective, Multiple Center Study of WeFlow-Tbranch Stent Graft System(GUEST Study)",
+    "condition": [
+      "Type B Aortic Dissection"
+    ],
+    "intervention": [
+      "WeFlow-Tbranch Stent Graft System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "start_date": "2020-12-25",
+    "completion_date": "2026-12-25",
+    "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06158867",
+    "title": "Confirmatory Study: Assessing the Efficacy and Safety of the AcusMu Microneedle Patch in Treating Periorbital Wrinkles",
+    "condition": [
+      "Wrinkle"
+    ],
+    "intervention": [
+      "FMD WK"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "COMPLETED",
+    "start_date": "2023-11-24",
+    "completion_date": "2024-01-31",
+    "sponsor": "AcusMu Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05107050",
+    "title": "Comparing a Synergistic Antimicrobial Cleanser and Gel to Normal Saline and an Amorphous Gel in Reducing Bioburden and Promoting Healing in Chronic Lower Extremity Ulcers",
+    "condition": [
+      "Wound of Skin"
+    ],
+    "intervention": [
+      "Normal Saline and Amorphous gel",
+      "BIAKOS\u2122 Antimicrobial Skin & Wound Cleanser, BIAK\u014cS Antimicrobial Wound Gel"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2021-12-01",
+    "completion_date": "2023-05-25",
+    "sponsor": "SerenaGroup, Inc.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT01794468",
+    "title": "A New Monitor to Measure Dermal Blood Flow in Critically Ill Patients: a Preliminary Study",
+    "condition": [
+      "Positive-Pressure Respiration, Intrinsic",
+      "Critically Ill Patients"
+    ],
+    "intervention": [
+      "Dermal blood flow measurements"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2003-06",
+    "completion_date": "2005-07",
+    "sponsor": "Rabin Medical Center",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05850013",
+    "title": "The Measurement of Vital Signs in Children by Lifelight\u00ae Software in Comparison to the Standard of Care",
+    "condition": [
+      "Cardiovascular Diseases",
+      "Respiratory Disease",
+      "Febrile Illness",
+      "Pediatric ALL"
+    ],
+    "intervention": [
+      "Lifelight Junior"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "COMPLETED",
+    "start_date": "2023-05-01",
+    "completion_date": "2024-04-01",
+    "sponsor": "Xim Limited",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT01683474",
+    "title": "Safety and Performance of TAVI of Venus MedTech Aortic Valve Prosthesis",
+    "condition": [
+      "Aortic Valve Stenosis",
+      "Aortic Valve Calcification"
+    ],
+    "intervention": [
+      "Venus MedTech Aortic Valve Prosthesis"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2012-09",
+    "completion_date": "2016-04",
+    "sponsor": "Venus MedTech (HangZhou) Inc.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05324787",
+    "title": "Treatment of Vein Stenosis or Occlusion With the Oblique Stent",
+    "condition": [
+      "Iliac Vein Stenosis",
+      "Iliac Vein Occlusion"
+    ],
+    "intervention": [
+      "Grency venous stent system"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2019-08-22",
+    "completion_date": "2021-12-09",
+    "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT03944447",
+    "title": "Outcomes Mandate National Integration With Cannabis as Medicine",
+    "condition": [
+      "Chronic Pain",
+      "Chronic Pain Syndrome",
+      "Chronic Pain Due to Injury",
+      "Chronic Pain Due to Trauma",
+      "Fibromyalgia",
+      "Seizures",
+      "Hepatitis C",
+      "Cancer",
+      "Crohn Disease",
+      "HIV/AIDS",
+      "Multiple Sclerosis",
+      "Traumatic Brain Injury",
+      "Sickle Cell Disease",
+      "Post Traumatic Stress Disorder",
+      "Tourette Syndrome",
+      "Ulcerative Colitis",
+      "Glaucoma",
+      "Epilepsy",
+      "Inflammatory Bowel Diseases",
+      "Parkinson Disease",
+      "Amyotrophic Lateral Sclerosis",
+      "Chronic Traumatic Encephalopathy",
+      "Anxiety",
+      "Depression",
+      "Insomnia",
+      "Autism",
+      "Opioid-use Disorder",
+      "Bipolar Disorder",
+      "Covid19",
+      "SARS-CoV Infection",
+      "COVID-19",
+      "Corona Virus Infection",
+      "Coronavirus"
+    ],
+    "intervention": [
+      "Cannabis, Medical",
+      "RYAH-Medtech Inhaler"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2018-12-01",
+    "completion_date": "2025-12-31",
+    "sponsor": "OMNI Medical Services, LLC",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06325384",
+    "title": "Real World Evaluation of Lifelight\u00ae: A Contactless Vital Signs Monitor for Self-monitoring Blood Pressure and Its Comparison to Standard of Care",
+    "condition": [
+      "Hypertension"
+    ],
+    "intervention": [
+      "Lifelight",
+      "Blood Pressure Cuff"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2025-02-10",
+    "completion_date": "2025-12-31",
+    "sponsor": "Xim Limited",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05739058",
+    "title": "Violet-Blue Light Inactivation of Bacteria in Chronic Wounds",
+    "condition": [
+      "Phototherapy Complication",
+      "Photobiology",
+      "Light Treatment; Complications",
+      "Wound Infection",
+      "Wound Heal"
+    ],
+    "intervention": [
+      "Violet-Blue Light Treatment / FlashHeal Device"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2023-03-22",
+    "completion_date": "2024-05-01",
+    "sponsor": "Bispebjerg Hospital",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05375110",
+    "title": "NoYA RAISE Trial II (Radiofrequency Ablation-Based Interatrial Shunt for Heart Failure)",
+    "condition": [
+      "Heart Failure"
+    ],
+    "intervention": [
+      "NoYA\u2122 Radiofrequency Interatrial Shunt System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2021-03-10",
+    "completion_date": "2023-12-31",
+    "sponsor": "Hangzhou NOYA MedTech Co. Ltm.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06659796",
+    "title": "LifeVac Survey Study",
+    "condition": [
+      "Airway Obstruction",
+      "Choking"
+    ],
+    "intervention": [
+      "LifeVac"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "COMPLETED",
+    "start_date": "2024-06-24",
+    "completion_date": "2025-01-31",
+    "sponsor": "LifeVac, LLC",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06259084",
+    "title": "Study to Estimate Seedchrony's Predictive Capacity in the Success of Embryo Implantation.",
+    "condition": [
+      "Infertility"
+    ],
+    "intervention": [
+      "Seedchrony"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2024-02-28",
+    "completion_date": "2025-07-05",
+    "sponsor": "Manina Medtech",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT01101971",
+    "title": "Preparing Medical Students to Undertake a First Female Pelvic Exam.",
+    "condition": [
+      "Female Pelvic Exam"
+    ],
+    "intervention": [
+      "Pelvic exam video tutorial"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2010-04",
+    "completion_date": "2010-05",
+    "sponsor": "Queen's University",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04745546",
+    "title": "Guo's Visceral Arteries Reconstruction :The First in Man Study of WeFlow-JAAA Stent Graft System",
+    "condition": [
+      "Juxta Renal Abdominal Aortic Aneurysm Without Rupture"
+    ],
+    "intervention": [
+      "WeFlow-JAAA Stent Graft System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2019-10-28",
+    "completion_date": "2022-02-01",
+    "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05060185",
+    "title": "The Flow Diverter for Treating Patients With Intracranial Aneurysms",
+    "condition": [
+      "Intracranial Aneurysm"
+    ],
+    "intervention": [
+      "the Flow Diverter"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2021-10-17",
+    "completion_date": "2024-05-31",
+    "sponsor": "Jiangsu CED Medtech Co., Ltd",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT07139912",
+    "title": "Prospective, Multicenter, Single-Arm Study of Aortic Arch Pathology Reconstruction",
+    "condition": [
+      "Aortic Arch Disease"
+    ],
+    "intervention": [
+      "Thoracic Aortic Multi-Branch Stent Graft System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "NOT_YET_RECRUITING",
+    "start_date": "2025-09",
+    "completion_date": "2032-03",
+    "sponsor": "Shanghai MicroPort Endovascular MedTech\uff08Group\uff09Co., Ltd",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05434676",
+    "title": "SOLUTION Trial in China",
+    "condition": [
+      "Peripheral Arterial Disease",
+      "Calcifications Vascular"
+    ],
+    "intervention": [
+      "Shockwave Medical Peripheral Intravascular Lithotripsy (IVL) System M5 & S4"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2021-06-15",
+    "completion_date": "2023-07-30",
+    "sponsor": "Genesis Medtech Corporation",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04765592",
+    "title": "Guo's Aortic Arch Reconstruction :The Prospective ,Multiple Center Study About the Safety and Efficacy of WeFlow-Arch Modeler Embedded Branch Stent Graft System (GIANT Study)",
+    "condition": [
+      "Aortic Arch Aneurysm"
+    ],
+    "intervention": [
+      "WeFlow-Arch Modeler Embedded Branch Stent Graft System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "start_date": "2021-06-07",
+    "completion_date": "2029-02-05",
+    "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06010563",
+    "title": "VenusP-Valve Pivotal Study (PROTEUS STUDY)",
+    "condition": [
+      "Pulmonary Regurgitation"
+    ],
+    "intervention": [
+      "Transcatheter pulmonary valve implantation (TPVI)",
+      "VenusP-ValveTM System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2024-06-11",
+    "completion_date": "2034-08-30",
+    "sponsor": "Venus MedTech (HangZhou) Inc.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT07032948",
+    "title": "Safety and Efficacy Study of the First Domestically Produced FireMagic\u2122 PreciSense\u2122 3D Microelectrode Ablation Catheter Therapy for Rapid Arrhythmia With Tissue Temperature Measurement Function",
+    "condition": [
+      "Rapid Arrhythmia",
+      "Atrial Fibrillation (AF)",
+      "Paroxysmal Supraventricular Tachycardia (PSVT)"
+    ],
+    "intervention": [
+      "FireMagic\u2122 PreciSense\u2122 3D Microelectrode Ablation Catheter\u3001EasyStars\u2122 High Density Mapping Catheter\u3001Columbus\u2122 3D EP Navigation System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "NOT_YET_RECRUITING",
+    "start_date": "2025-08-31",
+    "completion_date": "2025-08-31",
+    "sponsor": "Shanghai MicroPort EP MedTech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05399420",
+    "title": "Study of Kidney Circulating Cell-free DNA in Patients With Acute Kidney Failure",
+    "condition": [
+      "Kidney Failure, Acute"
+    ],
+    "intervention": [
+      "Blood sampling"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2022-09-10",
+    "completion_date": "2023-01-10",
+    "sponsor": "CGenetix",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06969560",
+    "title": "WeRoaM: Wearable Remote Monitoring in Heart Failure",
+    "condition": [
+      "Heart Failure"
+    ],
+    "intervention": [
+      "Remote Physiologic Monitoring (RPM)"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "RECRUITING",
+    "start_date": "2025-02-24",
+    "completion_date": "2028-12-31",
+    "sponsor": "University of Alberta",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04528576",
+    "title": "Dragonfly-M Early Feasibility Study",
+    "condition": [
+      "Mitral Regurgitation"
+    ],
+    "intervention": [
+      "Dragonfly mitral valve repair system"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2020-07-23",
+    "completion_date": "2023-12-31",
+    "sponsor": "Hangzhou Valgen Medtech Co., Ltd",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05433376",
+    "title": "SOLSTICE Trial in China",
+    "condition": [
+      "Coronary Artery Disease",
+      "Calcifications Vascular"
+    ],
+    "intervention": [
+      "Shockwave Coronary Intravascular Lithotripsy (IVL) System C2"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2021-04-15",
+    "completion_date": "2022-11-26",
+    "sponsor": "Genesis Medtech Corporation",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06062524",
+    "title": "Guo's False Lumen Embolization : The First in Man Study of WeFlow-EndoSeal Aorta Vascular Plug System",
+    "condition": [
+      "Aortic Dissection Aneurysm"
+    ],
+    "intervention": [
+      "Aorta Vascular Plug System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2023-10-24",
+    "completion_date": "2026-05-31",
+    "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT01661647",
+    "title": "3D Kinematic Assessment of the Human Knee During Physical and Daily Life Activities",
+    "condition": [
+      "3D Knee Kinematics"
+    ],
+    "intervention": [
+      "3D knee kinematic assessment under local anesthesia"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "NOT_YET_RECRUITING",
+    "start_date": "2025-07-02",
+    "completion_date": "2026-12-01",
+    "sponsor": "Centre hospitalier de l'Universit\u00e9 de Montr\u00e9al (CHUM)",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05835349",
+    "title": "Observational Study of Venus P-Valve",
+    "condition": [
+      "Right Ventricular Outflow Tract Dysfunction"
+    ],
+    "intervention": [
+      "transcatheter pulmonary valve implantation (TPVI)"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "RECRUITING",
+    "start_date": "2024-08-26",
+    "completion_date": "2032-12",
+    "sponsor": "Venus MedTech (HangZhou) Inc.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT02838004",
+    "title": "Non-comparative Study to Assess the Visual Performances and Safety of a Progressive Multifocal Intraocular Lens",
+    "condition": [
+      "Cataract",
+      "Presbyopia"
+    ],
+    "intervention": [
+      "IOL MINI WELL READY"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2016-08",
+    "completion_date": "2017-10",
+    "sponsor": "SIFI SpA",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05927441",
+    "title": "DragonFly EU Pivotal Study",
+    "condition": [
+      "Mitral Valve Insufficiency"
+    ],
+    "intervention": [
+      "DragonFly Transcatheter Mitral Valve Repair System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "NOT_YET_RECRUITING",
+    "start_date": "2023-12-01",
+    "completion_date": "2029-05-01",
+    "sponsor": "Hangzhou Valgen Medtech Co., Ltd",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06535152",
+    "title": "Lifelight Non-Invasive Blood Pressure and Heart Rate Validation Study",
+    "condition": [
+      "Hypertension"
+    ],
+    "intervention": [
+      "Lifelight",
+      "Manual sphygmomanometer"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2023-05-18",
+    "completion_date": "2023-08-03",
+    "sponsor": "Xim Limited",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT03905057",
+    "title": "Early Shockwave Therapy for Post-RP ED",
+    "condition": [
+      "Erectile Dysfunction Following Radical Prostatectomy"
+    ],
+    "intervention": [
+      "Dornier Aries 2 (with active applicator)",
+      "Dornier Aries 2 (with sham applicator)"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2018-03-26",
+    "completion_date": "2021-06",
+    "sponsor": "Dornier MedTech Systems",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06385379",
+    "title": "Guo's Aortic Arch Reconstruction: A Multicenter, Prospective Study of the Novel WeFlow-Tribranch System (GENIUS Study)",
+    "condition": [
+      "Aortic Arch Aneurysm"
+    ],
+    "intervention": [
+      "WeFlow-Tribranch embedded aortic Triple-branch arch Stent Graft system"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2024-06-30",
+    "completion_date": "2030-12-31",
+    "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05991271",
+    "title": "Venus-Vitae Pivotal Study Smart-Align Study",
+    "condition": [
+      "Aortic Valve Stenosis"
+    ],
+    "intervention": [
+      "Venus-Vitae Transcatheter Heart Valve System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "NOT_YET_RECRUITING",
+    "start_date": "2023-10-31",
+    "completion_date": "2029-06-30",
+    "sponsor": "Venus MedTech (HangZhou) Inc.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04893603",
+    "title": "To Evaluate Safety and Effectiveness of Transcatheter Aortic Valve System in Patients With Severe Aortic Stenosis",
+    "condition": [
+      "Aortic Valve Stenosis"
+    ],
+    "intervention": [
+      "Transcatheter Aortic Valve System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2020-12-16",
+    "completion_date": "2026-12-31",
+    "sponsor": "Chengdu Silara Meditech Inc.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT02590679",
+    "title": "Multi-center Trial of Percutaneous Pulmonary Valve Implantation With Venus-p",
+    "condition": [
+      "Pulmonary Regurgitation",
+      "Tetralogy of Fallot"
+    ],
+    "intervention": [
+      "Venues-P Valve"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2013-05",
+    "completion_date": "2017-02",
+    "sponsor": "Shanghai Zhongshan Hospital",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06559163",
+    "title": "A Study of Obexelimab in Patients With Systemic Lupus Erythematosus",
+    "condition": [
+      "Systemic Lupus Erythematosus"
+    ],
+    "intervention": [
+      "Obexelimab",
+      "Placebo"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2024-09-17",
+    "completion_date": "2026-09",
+    "sponsor": "Zenas BioPharma (USA), LLC",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04655742",
+    "title": "VitaFlow\u2122 Transcatheter Aortic Valve System Pre-market Trial",
+    "condition": [
+      "Aortic Valve Stenosis"
+    ],
+    "intervention": [
+      "VitaFlow\u2122 Transcatheter Aortic Valve System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2014-06-27",
+    "completion_date": "2021-12-31",
+    "sponsor": "Shanghai MicroPort CardioFlow Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06514196",
+    "title": "Post- Approval Hintermann Series H\u00ae Study 1",
+    "condition": [
+      "Ankle Osteoarthritis",
+      "Post-Traumatic Osteoarthritis of Ankle",
+      "Osteoarthritis of Ankle Secondary to Inflammatory Arthritis (Disorder)"
+    ],
+    "intervention": [
+      "Hintermann Series H3 Total Ankle Replacement System"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "start_date": "2020-06-18",
+    "completion_date": "2025-01-20",
+    "sponsor": "DT MedTech, LLC",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04764370",
+    "title": "Guo's Aortic Arch Reconstruction: The First in Man Study of WeFlow-Arch Modular Embedded Branch Stent Graft System",
+    "condition": [
+      "Aortic Arch; Aneurysm, Dissecting"
+    ],
+    "intervention": [
+      "WeFlow-Ach Moduler Embedded Branch Stent Graft System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2019-02-28",
+    "completion_date": "2022-10-22",
+    "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT01944553",
+    "title": "Robotic-assisted Pedicule Screw Placement",
+    "condition": [
+      "Lumbar Degenerative Spinal Disease"
+    ],
+    "intervention": [
+      "The ROSA\u2122 robot"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2013-09",
+    "completion_date": "2014-02",
+    "sponsor": "University Hospital, Montpellier",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04858230",
+    "title": "LymphoPilot Test for Limb Lymphedema",
+    "condition": [
+      "Lymphedema, Secondary",
+      "Lymphedema of Upper Limb",
+      "Lymphedema Arm",
+      "Lymphedema of Leg",
+      "Lymphedema, Lower Limb"
+    ],
+    "intervention": [
+      "LymphoPilot"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "TERMINATED",
+    "start_date": "2021-09-08",
+    "completion_date": "2023-09-30",
+    "sponsor": "Lymphatica Medtech SA",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05424653",
+    "title": "To Evaluate Safety and Effectiveness of Transcatheter Aortic Valve System in Patients With Severe Aortic Insufficiency",
+    "condition": [
+      "Aortic Insufficiency"
+    ],
+    "intervention": [
+      "Transcatheter Aortic Valve System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2022-08-01",
+    "completion_date": "2023-08-31",
+    "sponsor": "Chengdu Silara Meditech Inc.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05606367",
+    "title": "Coronary Non-slip Balloon Catheter in Patients With Coronary Artery Stenosis(CREST)",
+    "condition": [
+      "Coronary Artery Stenosis"
+    ],
+    "intervention": [
+      "Non-slip Balloon Catheter of Shanghai MicroPort Rhythm",
+      "NSE Coronary Dilatation Catheter"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2023-01-03",
+    "completion_date": "2023-10",
+    "sponsor": "Shanghai MicroPort Rhythm MedTech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05435001",
+    "title": "Screening of Sleep Apnea by Holter Electrocardiography: Validation of Heart Rate Variability Analysis Algorithm",
+    "condition": [
+      "Sleep Apnea Syndromes"
+    ],
+    "intervention": [
+      "Holter ECG Monitoring"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2022-05-05",
+    "completion_date": "2022-08-01",
+    "sponsor": "Izmir Dr Suat Seren Chest Diseases and Surgery Education and Research Hospital",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05196633",
+    "title": "Radial Extracorporeal Shock Wave Therapy and Visual Feedback Balance Training on Lower Limb Post-Stroke Spasticity, Trunk Performance and Balance:",
+    "condition": [
+      "Stroke, Ischemic",
+      "Stroke Hemorrhagic",
+      "Spasticity as Sequela of Stroke",
+      "Spastic Gait",
+      "Balance; Distorted"
+    ],
+    "intervention": [
+      "radial extracorporeal shock wave therapy",
+      "sham radial extracorporeal shock wave therapy"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2021-01-01",
+    "completion_date": "2021-08-31",
+    "sponsor": "Carol Davila University of Medicine and Pharmacy",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06968364",
+    "title": "FB-CT2 Includes Two Prospective, Multi-centre Studies With a Medical Device in Hospital Settings: a Randomized, Dual-arm, Open-label Pilot Study in Spain, Followed by a Single-arm, Non-randomized, Open-label International Pivotal Study",
+    "condition": [
+      "Threatened Preterm Labor"
+    ],
+    "intervention": [
+      "Cervisense Intravaginal Probe V0.1 cervical stiffness evaluation.",
+      "Transvaginal ultrasound"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2025-05-10",
+    "completion_date": "2027-04-01",
+    "sponsor": "Ultrasound-Innovation Medtech, S.L.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05519826",
+    "title": "A Retrospective, Observational Study to Collect Clinical Safety and Performance Data of POLYMAILLE\u00ae EXTRA THIN Vascular Prothesis",
+    "condition": [
+      "Aneurysm Abdominal",
+      "Peripheral Aneurysms",
+      "Arterial Disease Occlusive",
+      "Prothesis"
+    ],
+    "intervention": [
+      "Vascular surgery"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "COMPLETED",
+    "start_date": "2022-03-01",
+    "completion_date": "2022-04-20",
+    "sponsor": "Perouse Medical",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06014996",
+    "title": "InsightPFA Trial of the LotosPFA Catheter",
+    "condition": [
+      "Arrhythmias, Cardiac",
+      "Paroxysmal Atrial Fibrillation"
+    ],
+    "intervention": [
+      "Pulsed Field Ablation (PFA) Therapy",
+      "Radiofrequency Ablation\uff08RAF\uff09Therapy"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2023-09-04",
+    "completion_date": "2025-07-03",
+    "sponsor": "Insight Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT07082153",
+    "title": "The First-In-Man Use of Coronary Sinus Balloon Pump in STEMI Patients Treated by Primary PCI",
+    "condition": [
+      "STEMI"
+    ],
+    "intervention": [
+      "the coronary sinus balloon pump"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "NOT_YET_RECRUITING",
+    "start_date": "2025-08-12",
+    "completion_date": "2026-03-03",
+    "sponsor": "Shanghai MicroPort Rhythm MedTech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05615493",
+    "title": "The Effectiveness of Radial Extracorporeal Shock Wave Therapy as Additional Treatment Modality for Spastic Equinus Deformity in Chronic Hemiplegic Patients",
+    "condition": [
+      "Hemiplegic Patients"
+    ],
+    "intervention": [
+      "radial extracorporeal shock wave therapy",
+      "sham radial extracorporeal shock wave therapy"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2022-10-15",
+    "completion_date": "2023-03",
+    "sponsor": "Doaa Waseem Nada",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04131959",
+    "title": "Ticagrelor CytoSorb Hemoadsorption",
+    "condition": [
+      "Emergent Cardiothoracic Surgery",
+      "Bleeding",
+      "Drug Removal"
+    ],
+    "intervention": [
+      "CytoSorb 300 mL device"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "TERMINATED",
+    "start_date": "2019-10-29",
+    "completion_date": "2021-05-04",
+    "sponsor": "CytoSorbents, Inc",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05965271",
+    "title": "A Real World Study on Fabulous\u00ae Thoracic Aortic Stent System for Stanford B Aortic Dissection",
+    "condition": [
+      "Aortic Dissection"
+    ],
+    "intervention": [
+      "Fabulous Thoracic Aortic Stent System"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2023-08-01",
+    "completion_date": "2024-01",
+    "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05516043",
+    "title": "Safety and Performance of POLYTHESE\u00ae Vascular Prosthesis",
+    "condition": [
+      "Aneurysm Arterial",
+      "Peripheral Arterial Disease",
+      "Marfan Syndrome",
+      "Arterial Dissections",
+      "Ehlers-Danlos Syndrome"
+    ],
+    "intervention": [
+      "Implantation with POLYTHESE\u00ae"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "COMPLETED",
+    "start_date": "2021-07-07",
+    "completion_date": "2021-11-26",
+    "sponsor": "Perouse Medical",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT01272830",
+    "title": "Double-Blinded Clinical Trial Using Apatone\u00aeB for Symptomatic Postoperative Total Joint Replacements",
+    "condition": [
+      "Edematous",
+      "Synovitis",
+      "Foreign Body Reaction",
+      "Osteolysis"
+    ],
+    "intervention": [
+      "Placebo",
+      "Apatone\u00aeB"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2010-10",
+    "completion_date": "2015-12",
+    "sponsor": "IC-MedTech Corporation",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05977257",
+    "title": "VitaFlow\u00ae Transcatheter Aortic Valve Replacement System Pre-market Trial Long Term Follow Up \uff08VITAL\uff09",
+    "condition": [
+      "Aortic Valve Disease",
+      "Aortic Valve Stenosis"
+    ],
+    "intervention": [
+      "VitaFlow\u00ae Transcatheter Aortic Valve Replacement System"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "NOT_YET_RECRUITING",
+    "start_date": "2023-07-30",
+    "completion_date": "2028-10-30",
+    "sponsor": "Shanghai MicroPort CardioFlow Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05883592",
+    "title": "A Real-World Study on Distal Aortic Remodeling for Stanford Type B Aortic Dissection With Fabulous Thoracic Aortic Stent System",
+    "condition": [
+      "Aortic Dissection"
+    ],
+    "intervention": [
+      "Fabulous Thoracic Aortic Stent System"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2023-05",
+    "completion_date": "2024-05",
+    "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT03575039",
+    "title": "VitaFlowTM II Transcatheter Aortic Valve System Study",
+    "condition": [
+      "Aortic Valve Stenosis"
+    ],
+    "intervention": [
+      "VitaFlow II Transcatheter Aortic Valve System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2018-08",
+    "completion_date": "2024-12",
+    "sponsor": "Shanghai MicroPort CardioFlow Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06784466",
+    "title": "Coherent Sine Burst Electroporation (CSE) Ablation System US IDE Study for Patients With Atrial Fibrillation",
+    "condition": [
+      "Atrial Fibrillation (AF)",
+      "Persistant Atrial Fibrillation",
+      "Paroxysmal AF"
+    ],
+    "intervention": [
+      "Arg\u00e1 Medtech Coherent Sine-Burst Electroporation (CSE) Ablation System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2025-09-10",
+    "completion_date": "2027-08",
+    "sponsor": "Arga Medtech SA",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06573853",
+    "title": "Outcomes of PFA Vs. RFA for Patients with PSVT: a Retrospective and Propensity Score Matching Study",
+    "condition": [
+      "Paroxysmal Supraventricular Tachycardia",
+      "Catheter Ablation"
+    ],
+    "intervention": [
+      "Focal Pulsed Field Ablation (PFA)",
+      "Focal Radiofrequecy Ablation (RFA)"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "RECRUITING",
+    "start_date": "2022-10-11",
+    "completion_date": "2025-06-30",
+    "sponsor": "Caijie Shen",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06878404",
+    "title": "A Study to Evaluate the Efficacy and Safety of JNJ-77242113 (Icotrokinra) in Biologic-na\u00efve Participants With Active Psoriatic Arthritis",
+    "condition": [
+      "Arthritis, Psoriatic"
+    ],
+    "intervention": [
+      "Icotrokinra",
+      "Placebo",
+      "Active reference comparator"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2025-02-21",
+    "completion_date": "2028-11-21",
+    "sponsor": "Janssen Research & Development, LLC",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT07079813",
+    "title": "Clinical Study on the Efficiency of Rapid Arrhythmia Mapping Using EasyStars\u2122 High Density Mapping Catheter Applications",
+    "condition": [
+      "Ventricular Tachycardia (VT)",
+      "Atrial Tachycardia",
+      "Typical Atrial Flutter",
+      "Paroxysmal Atrial Fibrillation (PAF)"
+    ],
+    "intervention": [
+      "EasyStars\u2122 High Density Mapping Catheter"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "NOT_YET_RECRUITING",
+    "start_date": "2025-08-30",
+    "completion_date": "2027-12-31",
+    "sponsor": "Shanghai MicroPort EP MedTech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05607667",
+    "title": "Clinical Trial in China for Aortic Valve Stenosis",
+    "condition": [
+      "Diseases of Aortic Valve",
+      "Aortic Stenosis Disease"
+    ],
+    "intervention": [
+      "Transcatheter aortic valve replacement"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2022-10-14",
+    "completion_date": "2024-07-03",
+    "sponsor": "Genesis Medtech Corporation",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04375618",
+    "title": "RhEGF Incorporated in An Absorbable Collagen Membrane for The Management Of Gingival Recession Defects",
+    "condition": [
+      "Periodontitis"
+    ],
+    "intervention": [
+      "RhEGF",
+      "Plain Collagen"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2019-10-01",
+    "completion_date": "2021-11",
+    "sponsor": "SVS Institute of Dental Sciences",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05946837",
+    "title": "Near-infrared Fluorescence Lymphatic Imaging Assessment of Lymphatic Response to Pneumatic Back/Neck Lymphatic Drainage Delivered by a Pneumatic Manual Lymphatic Drainage Device",
+    "condition": [
+      "Neck Pain",
+      "Back Pain"
+    ],
+    "intervention": [
+      "Indocyanine green (ICG) dye",
+      "NIRF-LI imaging",
+      "Neuroglide pad"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2023-08-29",
+    "completion_date": "2023-09-01",
+    "sponsor": "The University of Texas Health Science Center, Houston",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06655428",
+    "title": "The REDUCE EU Study - Endobronchial Thermal Liquid Ablation (ETLA) for the Treatment of Emphysema",
+    "condition": [
+      "Emphysema or COPD",
+      "Emphysema",
+      "Emphysema, Pulmonary",
+      "COPD",
+      "COPD (Chronic Obstructive Pulmonary Disease)"
+    ],
+    "intervention": [
+      "Endobronchial Therman Liquid Ablation (ETLA)"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2025-01-10",
+    "completion_date": "2026-05",
+    "sponsor": "Morair Medtech, LLC",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT03398915",
+    "title": "The European Robotic Spinal Instrumentation (EUROSPIN) Study",
+    "condition": [
+      "Degenerative Disc Disease",
+      "Spondylolisthesis",
+      "Spinal Stenosis",
+      "Recurrent Disc Herniation",
+      "Spondylodiskitis",
+      "Spinal Tumor",
+      "Spinal Metastases"
+    ],
+    "intervention": [
+      "Transpedicular Instrumentation"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2018-02-20",
+    "completion_date": "2023-09-01",
+    "sponsor": "Marc Schr\u00f6der",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04821115",
+    "title": "Safety and Efficacy of Low-intensity Shockwave Therapy for Peyronie's Disease",
+    "condition": [
+      "Peyronie Disease",
+      "Penile Diseases"
+    ],
+    "intervention": [
+      "Low intensity choc waves therapy (active applicator)",
+      "Sham (sham applicator)"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2021-04-06",
+    "completion_date": "2024-05-24",
+    "sponsor": "Hopital Foch",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04722796",
+    "title": "HANGZHOU Solution in Bicuspid AS Undergoing TAVR",
+    "condition": [
+      "Aortic Stenosis",
+      "Aortic Stenosis With Bicuspid Valve"
+    ],
+    "intervention": [
+      "TAVR with Venus A plus using supra-annular sizing and THV implantation technique (Hangzhou solution)",
+      "TAVR with Venus A plus using annular sizing and THV implantation technique"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2021-04-12",
+    "completion_date": "2028-04-01",
+    "sponsor": "Second Affiliated Hospital, School of Medicine, Zhejiang University",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04921605",
+    "title": "Feasibility Study of Dragonfly System for Severe Tricuspid Regurgitation",
+    "condition": [
+      "Tricuspid Regurgitation"
+    ],
+    "intervention": [
+      "DragonFly transcatheter mitral valve clamping system"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2020-12-15",
+    "completion_date": "2023-06-15",
+    "sponsor": "Hangzhou Valgen Medtech Co., Ltd",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06535659",
+    "title": "VitaFlow LIBERTY Europe",
+    "condition": [
+      "Aortic Valve Stenosis"
+    ],
+    "intervention": [
+      "VitaFlow Liberty\u2122 Transcatheter Aortic Valve System"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "NOT_YET_RECRUITING",
+    "start_date": "2024-12",
+    "completion_date": "2032-06",
+    "sponsor": "Shanghai MicroPort CardioFlow Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06300268",
+    "title": "Advapro Coronary Stent System in Coronary Artery Diseased Patients.",
+    "condition": [
+      "Coronary Artery Disease",
+      "De Novo Stenosis Lesion",
+      "Coronary Stent Implantation"
+    ],
+    "intervention": [
+      "AdvaPro Sirolimus Eluting Coronary Stent System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "NOT_YET_RECRUITING",
+    "start_date": "2024-06",
+    "completion_date": "2026-12",
+    "sponsor": "Advanced MedTech Solutions Pvt. Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05179967",
+    "title": "Safety and Efficacy Study of WeFlow-JAAA Stent Graft System for Complex Abdominal Aortic Aneurysm(GREAT Study)",
+    "condition": [
+      "Juxtarenal Abdominal Aortic Aneurysm"
+    ],
+    "intervention": [
+      "WeFlow-JAAA Stent Graft System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2022-02-23",
+    "completion_date": "2023-12-31",
+    "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06910527",
+    "title": "Study of the Plasma and Urinary cfDNA of in Kidney Transplant Patients",
+    "condition": [
+      "Transplant Rejection",
+      "Transplant Kidney"
+    ],
+    "intervention": [],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "RECRUITING",
+    "start_date": "2024-05-30",
+    "completion_date": "2026-05-31",
+    "sponsor": "Poulet Geoffroy",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06721975",
+    "title": "Thulium Fiber Laser (TFL) vs Thulio Pulsed Thulium:YAG (p-Tm:YAG)",
+    "condition": [
+      "Kidney Stones",
+      "Nephrolithiasis"
+    ],
+    "intervention": [
+      "Thulio pulsed Thulium:YAG (p-Tm:YAG)",
+      "Thulium Laser Fiber (TFL)"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2024-08-01",
+    "completion_date": "2026-12-31",
+    "sponsor": "University of California, San Diego",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05556460",
+    "title": "Safety and Effectiveness Study of DragonFly-T System for Severe Tricuspid Regurgitation",
+    "condition": [
+      "Tricuspid Regurgitation"
+    ],
+    "intervention": [
+      "DragonFly-T Transcatheter Tricuspid Valve Repair System",
+      "Medical therapy"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2024-08-15",
+    "completion_date": "2027-12-15",
+    "sponsor": "Hangzhou Valgen Medtech Co., Ltd",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT03884803",
+    "title": "Healthy Moms for Healthy Babies",
+    "condition": [
+      "Mental Health"
+    ],
+    "intervention": [
+      "E-health website",
+      "Standard Care"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2019-04-08",
+    "completion_date": "2021-05",
+    "sponsor": "McGill University",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05818098",
+    "title": "Coronary Intravascular Lithotripsy System in Patients With Coronary Artery Calcification (VIGOUR)",
+    "condition": [
+      "Coronary Artery Calcification"
+    ],
+    "intervention": [
+      "Intravascular Lithotripsy System of Shanghai MicroPort Rhythm"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2023-03-29",
+    "completion_date": "2024-03",
+    "sponsor": "Shanghai MicroPort Rhythm MedTech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05398991",
+    "title": "Coronary Covered Stents Implantation for the Treatment of Coronary Artery Perforation",
+    "condition": [
+      "Coronary Artery Perforation"
+    ],
+    "intervention": [
+      "the Coronary Covered Stents System manufactured by Shanghai MicroPort Medical (Group) Co., Ltd."
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2022-10-26",
+    "completion_date": "2025-07",
+    "sponsor": "Shanghai MicroPort Rhythm MedTech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT01418079",
+    "title": "Accuracy of the O2 MedTech PMS-3000 Monitor",
+    "condition": [
+      "Healthy"
+    ],
+    "intervention": [
+      "O2 MedTech cerebral oximeter (Oxygen desaturation)"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2011-08",
+    "completion_date": "2012-02",
+    "sponsor": "O2 MedTech, Inc.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04414865",
+    "title": "VitaFlow\u2122 Transcatheter Aortic Valve System Post-market Study-The LAUNCH Study",
+    "condition": [
+      "Aortic Valve Stenosis"
+    ],
+    "intervention": [
+      "VitaFlow\u2122 Transcatheter Aortic Valve System"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "RECRUITING",
+    "start_date": "2020-04-26",
+    "completion_date": "2027-12-30",
+    "sponsor": "Shanghai MicroPort CardioFlow Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04733404",
+    "title": "Safety and Effectiveness Study of Dragonfly System for Functional Mitral Regurgitation",
+    "condition": [
+      "Mitral Regurgitation Functional"
+    ],
+    "intervention": [
+      "Dragonfly Transcatheter Mitral Valve Repair System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2022-03-12",
+    "completion_date": "2027-09-30",
+    "sponsor": "Hangzhou Valgen Medtech Co., Ltd",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04061837",
+    "title": "MitralStitch Mitral Valve Repair System for Mitral Regurgitation",
+    "condition": [
+      "Mitral Regurgitation"
+    ],
+    "intervention": [
+      "MitralStitch"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2019-08-23",
+    "completion_date": "2021-10-31",
+    "sponsor": "Xijing Hospital",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06386458",
+    "title": "Assessing AThrough Radiofrequency Transseptal Puncture System for Left Atrial Access",
+    "condition": [
+      "Heart Diseases",
+      "Atrial Fibrillation"
+    ],
+    "intervention": [
+      "AThrough radiofrequency transseptal puncture system",
+      "Traditional mechanical transseptal puncture needle"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2022-07-08",
+    "completion_date": "2023-05-11",
+    "sponsor": "Hangzhou NOYA MedTech Co. Ltm.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT03628222",
+    "title": "Transbronchial Lung Biopsy Guided by ENB",
+    "condition": [
+      "Lung Lesion(s) Requiring Evaluation"
+    ],
+    "intervention": [
+      "ENB-TBLB",
+      "X-ray-TBLB"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2019-01-04",
+    "completion_date": "2020-08-10",
+    "sponsor": "Changzhou LungHealth Medtech Company Limited",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT01844102",
+    "title": "Safety and Acceptability of the PrePex\u2122 Device for Male Circumcision in Zambia",
+    "condition": [
+      "HIV"
+    ],
+    "intervention": [
+      "PrePex"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2013-10",
+    "completion_date": "2014-04",
+    "sponsor": "FHI 360",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05447585",
+    "title": "Coronary Atherectomy System in Patients With Coronary Calcification (CORECT)",
+    "condition": [
+      "Calcification of Coronary Artery"
+    ],
+    "intervention": [
+      "Coronary atherectomy system of Shanghai MicroPort Rhythm",
+      "Rotablator Rotational Atherectomy System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2022-07-01",
+    "completion_date": "2024-12-10",
+    "sponsor": "Shanghai MicroPort Rhythm MedTech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT07039032",
+    "title": "A Clinical Study on the Use of a Domestically Produced Three-dimensional Cardiac Electrophysiological Mapping System Combined With Pressure Monitoring Technology and Star Mapping Technology for the Treatment of Paroxysmal Atrial Fibrillation.",
+    "condition": [
+      "Paroxysmal Atrial Fibrillation (PAF)"
+    ],
+    "intervention": [
+      "FireMagic\u2122 Magbot Ablation Catheter \u3001FireMagic\u2122 TrueForce\u2122 Ablation Catheter"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "NOT_YET_RECRUITING",
+    "start_date": "2025-09-30",
+    "completion_date": "2028-12-31",
+    "sponsor": "Shanghai MicroPort EP MedTech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06917248",
+    "title": "Evaluation of Clinical Effectiveness and Safety of Locaste 8F Guiding Catheter in Neurovascular Interventional Surgery",
+    "condition": [
+      "Stroke",
+      "Hemorrhagic Strokes"
+    ],
+    "intervention": [],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "COMPLETED",
+    "start_date": "2024-05-21",
+    "completion_date": "2024-10-07",
+    "sponsor": "Keuro MedTech",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05874206",
+    "title": "CRATOS - Evaluation of Cratos\u2122 Branch Stent Graft System in Treatment of Descending Aorta Lesions",
+    "condition": [
+      "Aortic Dissection Type B",
+      "Intramural Hematoma",
+      "Penetrating Aortic Ulcer"
+    ],
+    "intervention": [
+      "Cratos\u2122 Stent Graft"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2024-03-08",
+    "completion_date": "2031-12",
+    "sponsor": "Shanghai MicroPort Endovascular MedTech\uff08Group\uff09Co., Ltd",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06368037",
+    "title": "Feasibility Study of the DragonFire for Hypertrophic Obstructive Cardiomyopathy",
+    "condition": [
+      "Obstructive Hypertrophic Cardiomyopathy"
+    ],
+    "intervention": [
+      "DragonFire Transcatheter Myocardial Radiofrequency Ablation System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "NOT_YET_RECRUITING",
+    "start_date": "2024-08",
+    "completion_date": "2026-06",
+    "sponsor": "Hangzhou Valgen Medtech Co., Ltd",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06290661",
+    "title": "Clinical Trial of the Safety and Efficacy of Peripheral Nerve Stimulation in the Treatment of Peripheral Neuropathic Pain.",
+    "condition": [
+      "Postherpetic Neuralgia",
+      "Peripheral Neuropathic Pain",
+      "Trigeminal Neuralgia"
+    ],
+    "intervention": [
+      "Active electrostimulation",
+      "Placebo electrostimulation"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2023-02-09",
+    "completion_date": "2026-12-30",
+    "sponsor": "Union Hospital, Tongji Medical College, Huazhong University of Science and Technology",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT03039218",
+    "title": "Dornier Aries 2 Extracorporeal Shock Wave Device for the Treatment of Mild Erectile Dysfunction (ED)",
+    "condition": [
+      "Erectile Dysfunction"
+    ],
+    "intervention": [
+      "Dornier Aries 2",
+      "Placebo / Sham"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "TERMINATED",
+    "start_date": "2017-02-07",
+    "completion_date": "2018-03-29",
+    "sponsor": "Dornier MedTech Systems",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06494956",
+    "title": "To Evaluate the Safety of DBS in Patients With Primary Parkinson's Disease",
+    "condition": [
+      "Parkinson Disease Dementia"
+    ],
+    "intervention": [
+      "Implant device"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "NOT_YET_RECRUITING",
+    "start_date": "2024-07-01",
+    "completion_date": "2025-07-31",
+    "sponsor": "Jiangsu CED Medtech Co., Ltd",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT00894478",
+    "title": "Improving Lesion Detection in Children With Magnetic Resonance Imaging (MRI)-Negative Partial Epilepsy Using Diffusion Tensor Imaging",
+    "condition": [
+      "Localization-related Epilepsy",
+      "Partial Epilepsy"
+    ],
+    "intervention": [
+      "Diffusion Tensor Imaging (DTI)",
+      "Magnetoencephalography"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "COMPLETED",
+    "start_date": "2009-05",
+    "completion_date": "2012-05",
+    "sponsor": "The Hospital for Sick Children",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04575480",
+    "title": "The Ideal Time Interval Between Repeated Shock Wave Lithotripsy Sessions For Renal Stones: A Randomized Controlled Trial",
+    "condition": [
+      "Ideal Time Interval"
+    ],
+    "intervention": [
+      "Shock Wave Lithotripsy for renal stone."
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2020-07-15",
+    "completion_date": "2023-01-01",
+    "sponsor": "Mansoura University",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05572047",
+    "title": "Coherent Sine Burst (CSE) Electroporation System Pilot Study in Patients with Atrial Fibrillation",
+    "condition": [
+      "Atrial Fibrillation"
+    ],
+    "intervention": [
+      "Arga Medtech Coherent Sine-Burst Electroporation (CSE) Ablation System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2022-10-11",
+    "completion_date": "2026-06",
+    "sponsor": "Arga Medtech SA",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05727709",
+    "title": "Dynamic Changes of Torquetenovirus (TTV) Load in Chinese Renal Transplant Recipients",
+    "condition": [
+      "Kidney Transplant Rejection",
+      "Kidney Transplant Infection",
+      "Virus",
+      "Immunosuppression"
+    ],
+    "intervention": [],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2023-03-15",
+    "completion_date": "2024-06-30",
+    "sponsor": "Tongji Hospital",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05941455",
+    "title": "A Prospective Multicenter Pivotal Study to Evaluate Safety and Effectiveness of Venus-Neo Surgical Aortic Valve",
+    "condition": [
+      "Aortic Valve Disease",
+      "Cardiovascular Diseases"
+    ],
+    "intervention": [
+      "Venus-Neo Surgical Aortic Valve"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "NOT_YET_RECRUITING",
+    "start_date": "2023-10-31",
+    "completion_date": "2029-10-31",
+    "sponsor": "Jilin Venus Haoyue Medtech Limited",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05519761",
+    "title": "A Retrospective, Observational, Multicenter Study to Evaluate the Safety and Performance of POLYSITE\u00ae and SEESITE\u00ae Implantable Ports",
+    "condition": [
+      "Veinous",
+      "Chemotherapy",
+      "Antibiotics",
+      "Antiviral Drugs",
+      "Parenteral Nutrition",
+      "Blood Transfusion",
+      "Blood Derivatives Transfusion",
+      "PMCF Study"
+    ],
+    "intervention": [
+      "Implantation of veinous access ports"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2022-03-15",
+    "completion_date": "2022-10-30",
+    "sponsor": "Perouse Medical",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT07067372",
+    "title": "Clinical Study on the Safety and Efficacy of a New Magnetic Navigation Radiofrequency Ablation Catheter for Rapid Arrhythmia",
+    "condition": [
+      "Rapid Arrhythmia",
+      "PFA",
+      "Symptomatic Supraventricular Tachycardia"
+    ],
+    "intervention": [
+      "FireMagic\u2122 Magbot Ablation Catheter"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "NOT_YET_RECRUITING",
+    "start_date": "2025-12-31",
+    "completion_date": "2028-12-31",
+    "sponsor": "Shanghai MicroPort EP MedTech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05671640",
+    "title": "Feasibility Study of the DragonFly-T System for Severe Tricuspid Regurgitation",
+    "condition": [
+      "Tricuspid Regurgitation"
+    ],
+    "intervention": [
+      "DragonFly-T Transcatheter Tricuspid Valve Repair System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2022-10-27",
+    "completion_date": "2024-01-10",
+    "sponsor": "Hangzhou Valgen Medtech Co., Ltd",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT07036068",
+    "title": "A Clinical Study on the Use of a Domestically Produced Cryoablation System Combined With Balloon Cryoablation Technology for the Treatment of Paroxysmal Atrial Fibrillation",
+    "condition": [
+      "Paroxysmal Atrial Fibrillation (PAF)"
+    ],
+    "intervention": [
+      "IceMagic\u2122 CryoAblation Catheter"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "NOT_YET_RECRUITING",
+    "start_date": "2025-08-31",
+    "completion_date": "2027-12-31",
+    "sponsor": "Shanghai MicroPort EP MedTech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT02166541",
+    "title": "Evaluation of INRS With BCSK in Children With Spastic Bilateral Cerebral Palsy: a Randomized Controlled Trial.",
+    "condition": [
+      "Spastic Diplegia Cerebral Palsy"
+    ],
+    "intervention": [
+      "BCSK",
+      "Traditional spinal manipulation",
+      "INRS"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2014-01",
+    "completion_date": "2016-12",
+    "sponsor": "Karolinska Institutet",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04644835",
+    "title": "Low Energy Shock Wave Therapy and Non-Muscle Invasive Bladder Cancer",
+    "condition": [
+      "Non-Muscle Invasive Bladder Cancer"
+    ],
+    "intervention": [
+      "Low Energy Shock Wave Treatment",
+      "Sham Treatment"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2020-11-28",
+    "completion_date": "2023-11-28",
+    "sponsor": "Mansoura University",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04080362",
+    "title": "Safety and Performance Study of the MitralStitch Repair System.",
+    "condition": [
+      "Mitral Regurgitation"
+    ],
+    "intervention": [
+      "MitralStitch"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2019-07-05",
+    "completion_date": "2022-06-01",
+    "sponsor": "Hangzhou Valgen Medtech Co., Ltd",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05608655",
+    "title": "DKutting Balloon Versus Chocolate Balloon to Treat Femoral and Popliteal Artery Stenosis",
+    "condition": [
+      "Femoral Artery Stenosis",
+      "Popliteal Artery Stenosis"
+    ],
+    "intervention": [
+      "DKutting LL balloon",
+      "Chocolate balloon"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2022-12-27",
+    "completion_date": "2024-02-04",
+    "sponsor": "DK Medical Technology (Suzhou) Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05929313",
+    "title": "Scoreflex TRIO - Scoring PTCA Catheter",
+    "condition": [
+      "Coronary Arteriosclerosis"
+    ],
+    "intervention": [
+      "OrbusNeich Scoreflex TRIO",
+      "OrbusNeich Scoreflex NC"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2023-04-27",
+    "completion_date": "2024-05-29",
+    "sponsor": "OrbusNeich",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05523596",
+    "title": "A Phase 1 Study of the Safety and Tolerability of ICM20 in Adults",
+    "condition": [
+      "Safety Issues"
+    ],
+    "intervention": [
+      "ICM20",
+      "Benznidazole"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "start_date": "2022-12-20",
+    "completion_date": "2027-03",
+    "sponsor": "IC-MedTech Corporation",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06076850",
+    "title": "Low-Intensity Extracorporeal Shockwave Therapy for Penile Rehabilitation in Post-Radical Prostatectomy Patients",
+    "condition": [
+      "Erectile Dysfunction Following Radical Prostatectomy"
+    ],
+    "intervention": [
+      "Low-Intensity Extracorporeal Shockwave Therapy (LiEWST) - Active",
+      "Low-Intensity Extracorporeal Shockwave Therapy (LiEWST) - Sham"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2023-07-01",
+    "completion_date": "2025-06-30",
+    "sponsor": "Hospital Pengajar Universiti Putra Malaysia",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04643743",
+    "title": "A Retrospective, Observational, Multicentre, Study to Evaluate the Safety and Performance of POLYPATCH \u00ae Vascular Patch",
+    "condition": [
+      "Artery Stenosis, Carotid",
+      "Artery Stenosis",
+      "Occlusion of Artery",
+      "Stroke"
+    ],
+    "intervention": [
+      "Endarterectomy"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "COMPLETED",
+    "start_date": "2020-09-01",
+    "completion_date": "2022-06-10",
+    "sponsor": "Perouse Medical",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05820035",
+    "title": "A Multicenter Study of Pulsed Field Ablation for Paroxysmal Supraventricular Tachycardia",
+    "condition": [
+      "Paroxysmal Supraventricular Tachycardia",
+      "Atrioventricular Nodal Reentrant Tachycardia",
+      "Atrioventricular Reciprocating Tachycardia"
+    ],
+    "intervention": [
+      "Pulsed Field Ablation Device and CF-Sensing Pulsed Field Ablation Catheter"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2023-03-09",
+    "completion_date": "2024-12-09",
+    "sponsor": "Shanghai MicroPort EP MedTech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT01674816",
+    "title": "Minimally Invasive Three-dimensional Knee Kinematic Assessment and Surgical Guidance Using Ultrasonic Rigid Registration",
+    "condition": [
+      "Knee Osteoarthritis",
+      "Knee Instability",
+      "3D Knee Kinematics",
+      "Precision of Surgical Actions",
+      "Clinical Outcomes"
+    ],
+    "intervention": [
+      "Repeated Measurements of Knee Alignment and Kinematics",
+      "Computer Guidance of Surgical Actions"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "NOT_YET_RECRUITING",
+    "start_date": "2025-12-01",
+    "completion_date": "2026-12-01",
+    "sponsor": "Centre hospitalier de l'Universit\u00e9 de Montr\u00e9al (CHUM)",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04770870",
+    "title": "Post Approval Study2: Hintermann Series H3 Total Ankle Replacement System",
+    "condition": [
+      "Osteoarthritis Ankle",
+      "Post-Traumatic Osteoarthritis of Ankle",
+      "Osteoarthritis of Ankle Secondary to Inflammatory Arthritis (Disorder)"
+    ],
+    "intervention": [
+      "Hintermann Series H3 Total Ankle Replacement System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2022-02-01",
+    "completion_date": "2029-04",
+    "sponsor": "DT MedTech, LLC",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05754541",
+    "title": "Guo's Endovascular Aortic Arch Replacement of Aortic Dissection by WeFlow-Tribranch Endoprothesis: a Multicenter Pilot Study(GRAFT Study)",
+    "condition": [
+      "Aortic Aneurysm and Dissection"
+    ],
+    "intervention": [
+      "WeFlow-Tribranch Aortic Arch Stent Graft System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2022-11-10",
+    "completion_date": "2025-12-31",
+    "sponsor": "Hangzhou Endonom Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04589923",
+    "title": "The VISION-Acute Study",
+    "condition": [
+      "Hypertension",
+      "Hypoxia",
+      "Hypotension"
+    ],
+    "intervention": [
+      "Lifelight\u00ae Data Collect Blood Pressure Group",
+      "Lifelight\u00ae Data Collect Oxygen Saturation Group"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "COMPLETED",
+    "start_date": "2020-09-14",
+    "completion_date": "2022-05-07",
+    "sponsor": "Xim Limited",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06597188",
+    "title": "TAVR vs. SAVR Study of VitaFlow Liberty\u00ae for Severe BAV Stenosis",
+    "condition": [
+      "Aortic Stenosis",
+      "Bicuspid Aortic Valve (BAV)"
+    ],
+    "intervention": [
+      "VitaFlow Liberty",
+      "Commercially available surgical bioprosthetic valve"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "ENROLLING_BY_INVITATION",
+    "start_date": "2025-09-08",
+    "completion_date": "2032-09-30",
+    "sponsor": "Shanghai MicroPort CardioFlow Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT07086742",
+    "title": "Validation of the Smart Mask V1 System and Its Measurements of SpO2 and Pulse Rate",
+    "condition": [
+      "Sleep-disordered Breathing (SDB)",
+      "Sleep Apnea",
+      "Sleep Quality"
+    ],
+    "intervention": [
+      "Smart Mask V1 System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2025-09-01",
+    "completion_date": "2025-12-31",
+    "sponsor": "Pathway Medtech, LLC.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT01711411",
+    "title": "Observational Study of Male Circumcision Using PrePex Device",
+    "condition": [
+      "HIV"
+    ],
+    "intervention": [
+      "PrePex device for male circumcision"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "COMPLETED",
+    "start_date": "2012-11",
+    "completion_date": "2013-09",
+    "sponsor": "FHI 360",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04414878",
+    "title": "VitaFlow\u2122 II Transcatheter Aortic Valve System Pre-market Trial",
+    "condition": [
+      "Aortic Stenosis"
+    ],
+    "intervention": [
+      "VitaFlow\u2122 II Transcatheter Aortic Valve System"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2018-01-31",
+    "completion_date": "2027-01-31",
+    "sponsor": "Shanghai MicroPort CardioFlow Medtech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05580952",
+    "title": "Clinical Trial in China",
+    "condition": [
+      "Diseases of Aortic Valve",
+      "Aortic Regurgitation Disease"
+    ],
+    "intervention": [
+      "Transcatheter aortic valve replacement"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2022-10-14",
+    "completion_date": "2024-05-01",
+    "sponsor": "Genesis Medtech Corporation",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05813704",
+    "title": "Coronary Crossing System in Patients With Coronary Chronic Total Occlusions",
+    "condition": [
+      "Chronic Total Occlusion of Coronary Artery"
+    ],
+    "intervention": [
+      "Coronary Crossing System of Shanghai MicroPort Rhythm"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "RECRUITING",
+    "start_date": "2023-11-07",
+    "completion_date": "2025-05",
+    "sponsor": "Shanghai MicroPort Rhythm MedTech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT06232798",
+    "title": "A Dual Energy Catheter (PFA and RFA) and a PFA Catheter for the Treatment of PeAF",
+    "condition": [
+      "Persistent Atrial Fibrillation"
+    ],
+    "intervention": [
+      "a dual energy catheter (RF and PFA) or PFA catheter only will be to treat PeAF,Cardiac Pulsed Electric Field Ablation Catheter",
+      "catheter ablation"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2024-01-11",
+    "completion_date": "2025-04-30",
+    "sponsor": "Shanghai MicroPort EP MedTech Co., Ltd.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT04292210",
+    "title": "Human Factors Validation Testing for the Peripal System; a Manual Connection Assist Device for Peritoneal Dialysis Devices",
+    "condition": [
+      "End Stage Renal Failure on Dialysis",
+      "End Stage Renal Disease on Dialysis",
+      "Renal Failure",
+      "Peritoneal Dialysis",
+      "Renal Replacement Therapy"
+    ],
+    "intervention": [
+      "Perisafe"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "COMPLETED",
+    "start_date": "2018-02-19",
+    "completion_date": "2018-04-30",
+    "sponsor": "Peripal AG",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT05517876",
+    "title": "A Retrospective, Observational, Multicenter, Study to Collect Clinical Safety and Performance Data on POLYMAILLE\u00aeC",
+    "condition": [
+      "Abdominal Vascular Surgery",
+      "Peripheral Vascular Surgery",
+      "Vascular Prothesis",
+      "Aneurysm Abdominal",
+      "Aneurysm; Peripheral",
+      "Obliterative Arterail Disease"
+    ],
+    "intervention": [
+      "Vascular abdominal or peripheral surgery"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "COMPLETED",
+    "start_date": "2021-07-01",
+    "completion_date": "2021-09-30",
+    "sponsor": "Perouse Medical",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT02846753",
+    "title": "Implantation of the Venus P-Valve\u2122 in the Pulmonic Position in Patients With Native Outflow Tracts",
+    "condition": [
+      "Pulmonary Regurgitation"
+    ],
+    "intervention": [
+      "trans catheter heart valve replacement"
+    ],
+    "phase": null,
+    "type": "INTERVENTIONAL",
+    "status": "UNKNOWN",
+    "start_date": "2016-08-17",
+    "completion_date": "2024-12-31",
+    "sponsor": "Venus MedTech (HangZhou) Inc.",
+    "location": [],
+    "enrollment": null
+  },
+  {
+    "id": "NCT07021612",
+    "title": "A Clinical and Imaging Registry of Transcatheter Aortic Valve Implantation Using JenaValve System/ J-Valve System for Patients With Pure Aortic Regurgitation",
+    "condition": [
+      "Aortic Valve Disease"
+    ],
+    "intervention": [
+      "JenaValve",
+      "J-Valve"
+    ],
+    "phase": null,
+    "type": "OBSERVATIONAL",
+    "status": "RECRUITING",
+    "start_date": "2025-04-01",
+    "completion_date": "2028-09-30",
+    "sponsor": "Prince of Wales Hospital, Shatin, Hong Kong",
+    "location": [],
+    "enrollment": null
+  }
+]
+
+
+--------------------------------------------------
+File: llm_interface.py
+--------------------------------------------------
+import streamlit as st
+from groq import Groq
+import os
+from dotenv import load_dotenv
+
+def get_groq_client():
+    load_dotenv()  # Load from .env file
+    api_key = os.getenv("GROQ_API_KEY") or st.secrets.get("GROQ_API_KEY")
+    if not api_key:
+        raise ValueError("GROQ_API_KEY not found in environment or Streamlit secrets")
+    return Groq(api_key=api_key)
+
+def ask_roo(prompt, signals=None, max_signals=50):
+    try:
+        client = get_groq_client()
+        
+        # Better signal formatting with fallbacks
+        signal_text = ""
+        if signals and isinstance(signals, list):
+            trimmed_signals = signals[:max_signals]
+            signal_entries = []
+            for s in trimmed_signals:
+                title = s.get('title', 'Unknown Study')
+                sponsor = s.get('sponsor', 'Unknown Sponsor')
+                status = s.get('status', 'Status Unknown')
+                signal_entries.append(f"- {title} by {sponsor} ({status})")
+            
+            signal_text = "\n".join(signal_entries)
+            prompt = f"{prompt}\n\nRelevant MedTech trials:\n{signal_text}"
+
+        chat_completion = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are Roo, a helpful MedTech analyst. Use the provided clinical trial data to answer questions accurately. Be specific and cite relevant trials when possible.",
+                },
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
+            model="llama-3.1-8b-instant",
+            timeout=30  # Add timeout
+        )
+        return chat_completion.choices[0].message.content
+
+    except Exception as e:
+        return f"❌ Sorry, I encountered an error: {str(e)}"
+
+
+
+
+
+
+--------------------------------------------------
+File: requirements.txt
+--------------------------------------------------
+streamlit>=1.28.0
+groq>=0.3.0
+python-dotenv>=1.0.0
+requests>=2.31.0
+pandas>=2.0.0
+plotly>=5.0.0
+tenacity>=8.2.0  # For retry logic
+
+
+
+
+--------------------------------------------------
+File: scrape_trials.py
+--------------------------------------------------
+import requests
+import json
+import csv
+import logging
+import argparse
+from typing import List, Dict, Any
+
+API_URL = "https://clinicaltrials.gov/api/v2/studies"
+
+def fetch_trials(
+    keyword: str = "medtech",
+    max_records: int = 100,
+    status: str = None,
+    page_size: int = 100
+) -> List[Dict[str, Any]]:
+    """Fetch clinical trials from ClinicalTrials.gov API with pagination."""
+    logging.info("Fetching trials for keyword='%s', status='%s', max_records=%d", keyword, status, max_records)
+    trials = []
+    page_token = None
+    fetched = 0
+
+    while fetched < max_records:
+        params = {
+            "query.term": keyword,
+            "pageSize": min(page_size, max_records - fetched),
+            "format": "json",
+        }
+        if status:
+            params["filters.overallStatus"] = status
+        if page_token:
+            params["pageToken"] = page_token
+
+        try:
+            response = requests.get(API_URL, params=params, timeout=30)
+            response.raise_for_status()
+            data = response.json()
+            studies = data.get("studies", [])
+            for study in studies:
+                protocol_section = study.get("protocolSection", {})
+                identification_module = protocol_section.get("identificationModule", {})
+                status_module = protocol_section.get("statusModule", {})
+                sponsor_module = protocol_section.get("sponsorCollaboratorsModule", {})
+                trial = {
+                    "id": identification_module.get("nctId", "Unknown"),
+                    "title": identification_module.get("briefTitle", "No title"),
+                    "condition": identification_module.get("conditions", []),
+                    "type": protocol_section.get("designModule", {}).get("studyType", "Unknown"),
+                    "status": status_module.get("overallStatus", "Unknown"),
+                    "sponsor": sponsor_module.get("leadSponsor", {}).get("name", "Unknown"),
+                    "start_date": status_module.get("startDateStruct", {}).get("date", "Unknown"),
+                    "url": f"https://clinicaltrials.gov/study/{identification_module.get('nctId', '')}",
+                }
+                trials.append(trial)
+            fetched += len(studies)
+            page_token = data.get("nextPageToken")
+            if not studies or not page_token:
+                break
+        except requests.exceptions.RequestException as e:
+            logging.error("HTTP error: %s", e)
+            break
+        except Exception as e:
+            logging.error("Unexpected error: %s", e)
+            break
+
+    logging.info("Fetched %d trials", len(trials))
+    return trials[:max_records]
+
+def save_to_json(trials: List[Dict[str, Any]], filename: str):
+    """Save trials to a JSON file."""
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(trials, f, indent=2)
+    logging.info("Saved %d records to '%s'", len(trials), filename)
+
+def save_to_csv(trials: List[Dict[str, Any]], filename: str):
+    """Save trials to a CSV file."""
+    if not trials:
+        logging.warning("No trials to save.")
+        return
+    fieldnames = list(trials[0].keys())
+    with open(filename, "w", encoding="utf-8", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(trials)
+    logging.info("Saved %d records to '%s'", len(trials), filename)
+
+def main():
+    parser = argparse.ArgumentParser(description="Fetch clinical trials from ClinicalTrials.gov")
+    parser.add_argument("--keyword", default="medtech", help="Search keyword")
+    parser.add_argument("--max_records", type=int, default=100, help="Maximum number of records")
+    parser.add_argument("--status", default=None, help="Trial recruitment status (e.g., RECRUITING)")
+    parser.add_argument("--output", default="knowledge_base.json", help="Output filename")
+    parser.add_argument("--format", choices=["json", "csv"], default="json", help="Output format")
+    parser.add_argument("--log", default="info", choices=["debug", "info", "warning", "error"], help="Log level")
+
+    args = parser.parse_args()
+    logging.basicConfig(level=getattr(logging, args.log.upper()))
+
+    trials = fetch_trials(args.keyword, args.max_records, args.status)
+    if args.format == "json":
+        save_to_json(trials, args.output)
+    else:
+        save_to_csv(trials, args.output)
+
+if __name__ == "__main__":
+    main()
+
+
+--------------------------------------------------
+File: streamlit_app.py
+--------------------------------------------------
+# streamlit_app.py
+import streamlit as st
+import json
+import os
+# Add charts
+import pandas as pd
+
+
+from datetime import datetime
+from llm_interface import ask_roo
+from scrape_trials import fetch_trials, save_to_json
+
+# Set page config first
+st.set_page_config(
+    page_title="Wapyrus - MedTech Signal Explorer", 
+    page_icon="🧠", 
+    layout="wide"
+)
+
+def load_signals(file_path="knowledge_base.json"):
+    """Load signals from JSON file with error handling"""
+    try:
+        if os.path.exists(file_path):
+            with open(file_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                # Ensure we return a list, even if empty
+                return data if isinstance(data, list) else []
+        else:
+            st.warning("📁 No data file found. Click 'Refresh Clinical Trials' to fetch data.")
+            return []
+    except Exception as e:
+        st.error(f"❌ Error loading data: {e}")
+        return []
+
+def filter_signals(signals, selected_type):
+    """Filter signals by type with better matching"""
+    if not signals:
+        return []
+    
+    if selected_type == "All":
+        return signals
+    
+    # More flexible type mapping
+    type_map = {
+        "Clinical Trial": "INTERVENTIONAL", 
+        "Observational Study": "OBSERVATIONAL"
+    }
+    
+    target_type = type_map.get(selected_type, selected_type)
+    
+    # Flexible matching - check if type contains target (case-insensitive)
+    filtered = []
+    for signal in signals:
+        signal_type = signal.get("type", "").upper()
+        if target_type.upper() in signal_type:
+            filtered.append(signal)
+    
+    return filtered
+
+# Initialize session state
+if 'signals' not in st.session_state:
+    st.session_state.signals = load_signals()
+
+if 'last_update' not in st.session_state:
+    st.session_state.last_update = None
+
+# UI Header
+st.title("🧠 Wapyrus — MedTech Signal Explorer")
+st.markdown("Ask Roo anything about recent MedTech signals.")
+
+# Sidebar with controls
+with st.sidebar:
+    st.header("Controls")
+    
+    max_fetch = st.number_input(
+    "Clinical trials to fetch:",
+    min_value=10,    # smallest allowed
+    max_value=1000,  # largest allowed
+    value=50,        # default value shown
+    step=10
+)  
+
+    # Refresh button with better error handling
+    if st.button("🔄 Refresh Clinical Trials", type="primary"):
+        with st.spinner("Fetching latest clinical trials..."):
+            try:
+                new_trials = fetch_trials(max_records=int(max_fetch))
+  # Start small
+                if new_trials:
+                    save_to_json(new_trials, "knowledge_base.json")
+                    st.session_state.signals = new_trials
+                    st.session_state.last_update = datetime.now()
+                    st.success(f"✅ Fetched {len(new_trials)} trials!")
+                else:
+                    st.error("❌ No trials were fetched. API might be unavailable.")
+            except Exception as e:
+                st.error(f"❌ Failed to fetch trials: {str(e)}")
+    # Add to sidebar
+    st.sidebar.subheader("Advanced Filters")
+    status_filter = st.sidebar.multiselect(
+        "Trial Status:",
+        ["RECRUITING", "COMPLETED", "ACTIVE_NOT_RECRUITING", "UNKNOWN"]
+        )
+
+    # Date range filter
+    date_range = st.sidebar.date_input(
+        "Start Date Range:",
+        value=(datetime(2023, 1, 1), datetime.now())
+        )
+    
+    # Show last update
+    if st.session_state.last_update:
+        st.info(f"Last update: {st.session_state.last_update.strftime('%Y-%m-%d %H:%M')}")
+    
+    # Signal type filter
+    st.subheader("Filters")
+    signal_types = ["All", "Clinical Trial", "Observational Study"]
+    selected_type = st.selectbox("Filter by study type:", signal_types)
+    
+    # Debug info
+    st.subheader("Debug Info")
+    st.write(f"Signals loaded: {len(st.session_state.signals)}")
+    
+    if st.session_state.signals:
+        # Show file info
+        if os.path.exists("knowledge_base.json"):
+            file_size = os.path.getsize("knowledge_base.json")
+            st.write(f"File size: {file_size} bytes")
+        
+        # Show first trial as sample
+        if len(st.session_state.signals) > 0:
+            st.write("First trial sample:")
+            sample_trial = st.session_state.signals[0]
+            st.json(sample_trial)
+
+# Main content area
+st.header("Ask Roo")
+
+# Use session state signals
+signals = st.session_state.signals
+filtered_signals = filter_signals(signals, selected_type)
+
+# Premade questions
+premade_questions = [
+    "What are the most recent MedTech clinical trials?",
+    "Which companies are conducting heart-related trials?",
+    "Show me trials related to diabetes technology",
+    "What's new in cardiovascular MedTech trials?"
+]
+
+question = st.selectbox("💡 Try a premade question:", [""] + premade_questions)
+
+# Custom question input
+user_question = st.text_input("Or ask your own question:", value=question if question else "")
+
+# Ask Roo
+if user_question and signals:
+    with st.spinner("🧠 Roo is analyzing the clinical trials..."):
+        response = ask_roo(user_question, filtered_signals)
+    
+    st.subheader("Roo's Analysis:")
+    st.write(response)
+
+elif user_question and not signals:
+    st.warning("⚠️ No clinical trial data available. Please click 'Refresh Clinical Trials' first.")
+
+# Data explorer section
+st.header("📊 Clinical Trials Data")
+
+if signals:
+    st.success(f"✅ Loaded {len(signals)} clinical trials")
+    
+    # Show filtered count
+    if selected_type != "All":
+        st.write(f"**Filtered to {len(filtered_signals)} {selected_type} trials**")
+    
+    # Data explorer section - SIMPLIFIED
+st.header("📊 Clinical Trials Data Explorer")
+
+if signals:
+    st.success(f"✅ Loaded {len(signals)} clinical trials")
+    
+    # Show statistics
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("Total Trials", len(signals))
+    with col2:
+        interventional = len([s for s in signals if s.get("type") == "INTERVENTIONAL"])
+        st.metric("Interventional", interventional)
+    with col3:
+        observational = len([s for s in signals if s.get("type") == "OBSERVATIONAL"])
+        st.metric("Observational", observational)
+    
+    # Show filtered count
+    if selected_type != "All":
+        st.write(f"**Filtered to {len(filtered_signals)} {selected_type} trials**")
+        
+    
+    
+    # SIMPLE DATA DISPLAY - Always show something
+    with st.expander("📋 View All Trial Data"):
+        if filtered_signals:
+            # Show as a simple list first
+            for i, trial in enumerate(filtered_signals):
+                st.write(f"**{i+1}. {trial.get('title', 'No Title')}**")
+                st.write(f"   - ID: {trial.get('id', 'Unknown')}")
+                st.write(f"   - Type: {trial.get('type', 'Unknown')}")
+                st.write(f"   - Status: {trial.get('status', 'Unknown')}")
+                st.write(f"   - Sponsor: {trial.get('sponsor', 'Unknown')}")
+                st.write("---")
+        else:
+            # Show all signals if filter returns nothing
+            st.warning("No trials match the current filter. Showing all trials:")
+            for i, trial in enumerate(signals[:10]):  # Show first 10
+                st.write(f"**{i+1}. {trial.get('title', 'No Title')}**")
+                st.write(f"   - ID: {trial.get('id', 'Unknown')}")
+                st.write(f"   - Type: {trial.get('type', 'Unknown')}")
+                st.write(f"   - Status: {trial.get('status', 'Unknown')}")
+                st.write("---")
+            
+            if len(signals) > 10:
+                st.info(f"Showing first 10 of {len(signals)} total trials")
+else:
+    st.error("❌ No clinical trial data available. Click the 'Refresh Clinical Trials' button to fetch data.")
+    
+    # Add this after your data display section
+st.header("📊 Trial Analytics Dashboard")
+
+if signals:
+    import pandas as pd
+    
+    # Convert to DataFrame
+    df = pd.DataFrame(signals)
+    
+    # Create columns for different charts
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.subheader("Trial Status")
+        status_counts = df['status'].value_counts()
+        st.dataframe(status_counts, use_container_width=True)
+        st.bar_chart(status_counts)
+    
+    with col2:
+        st.subheader("Trial Types")
+        type_counts = df['type'].value_counts()
+        st.dataframe(type_counts, use_container_width=True)
+        st.bar_chart(type_counts)
+    
+    # Timeline analysis (if you have dates)
+    st.subheader("Trial Timeline")
+    if 'start_date' in df.columns:
+        # Extract year from start_date
+        df['year'] = pd.to_datetime(df['start_date'], errors='coerce').dt.year
+        yearly_counts = df['year'].value_counts().sort_index()
+        st.line_chart(yearly_counts)
+    else:
+        st.info("No date data available for timeline")
+    
+    # Top sponsors table
+    st.subheader("Top 10 Sponsors")
+    top_sponsors = df['sponsor'].value_counts().head(10)
+    st.dataframe(top_sponsors, use_container_width=True)
+
+else:
+    st.info("No data available for analytics")
+
+
+# Footer
+st.markdown("---")
+st.caption("Wapyrus MedTech Signal Explorer - Powered by ClinicalTrials.gov API")
+
+
