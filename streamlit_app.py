@@ -84,17 +84,23 @@ with st.sidebar:
     if st.button("🔄 Refresh Clinical Trials", type="primary"):
         with st.spinner("Fetching latest clinical trials..."):
             try:
-                # Pass the 'medtech' keyword directly to the function
-                new_trials = fetch_trials(keyword="medtech", max_records=int(max_fetch))
+                # 1. Fetch data from ClinicalTrials.gov
+                all_trials = fetch_trials(keyword="medtech", max_records=int(max_fetch))
                 
-                if new_trials:
-                    # Save the new data and update the app state
-                    save_to_json(new_trials, "knowledge_base.json")
-                    st.session_state.signals = new_trials
+                # 2. Fetch data from EU CTR and extend the list
+                # This function is not being called in your current streamlit_app.py
+                from scrape_eu import fetch_eu_trials
+                eu_trials = fetch_eu_trials(keyword="medtech")
+                all_trials.extend(eu_trials)
+                
+                if all_trials:
+                    # Save the combined data and update the app state
+                    save_to_json(all_trials, "knowledge_base.json")
+                    st.session_state.signals = all_trials
                     st.session_state.last_update = datetime.now()
-                    st.success(f"✅ Fetched {len(new_trials)} trials!")
+                    st.success(f"✅ Fetched and merged {len(all_trials)} trials from multiple sources!")
                 else:
-                    st.error("❌ No trials were fetched. API might be unavailable.")
+                    st.error("❌ No trials were fetched. APIs might be unavailable.")
             except Exception as e:
                 st.error(f"❌ Failed to fetch trials: {str(e)}")
   # Start small
