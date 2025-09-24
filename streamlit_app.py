@@ -80,15 +80,6 @@ with st.sidebar:
     step=10
 )  
 
-    st.header("Advanced Filters")
-    condition = st.text_input("Condition/Disease")
-    intervention = st.text_input("Intervention/Treatment")
-    location = st.text_input("Location")
-    sponsor = st.text_input("Sponsor")
-    only_with_results = st.checkbox("Only Studies With Results")
-    date_field = st.selectbox("Date Field", ["Start Date", "Completion Date", "Last Update"])
-    # Use these in your fetch_trials logic!  
-   
     # Refresh button with better error handling
     if st.button("🔄 Refresh Clinical Trials", type="primary"):
         with st.spinner("Fetching latest clinical trials..."):
