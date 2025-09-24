@@ -159,12 +159,12 @@ def normalize_trial_data(raw_data):
         "id": raw_data.get("eudraCTId", ""),
         "title": raw_data.get("publicTitle", ""),
         "condition": raw_data.get("condition", ""),
-        "type": raw_data.get("studyType", "Interventional trial"),  # Default value
+        "type": raw_data.get("studyType", "Interventional trial"),
         "status": raw_data.get("status", ""),
         "start_date": raw_data.get("startDate", ""),
         "completion_date": raw_data.get("completionDate", ""),
         "sponsor": raw_data.get("mainSponsor", ""),
-        "source": "EU Clinical Trials Register"
+        "source": "EU Clinical Trials Register"  # This is important!
     }
 
 def get_sample_data():
