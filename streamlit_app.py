@@ -29,21 +29,29 @@ def load_signals(file_path="knowledge_base.json"):
         return []
 
 def filter_signals(signals, selected_type):
-    """Filter signals by type"""
+    """Filter signals by type with better matching"""
     if not signals:
         return []
     
     if selected_type == "All":
         return signals
     
-    # Handle both INTERVENTIONAL/OBSERVATIONAL and your custom types
+    # More flexible type mapping
     type_map = {
         "Clinical Trial": "INTERVENTIONAL", 
         "Observational Study": "OBSERVATIONAL"
     }
     
     target_type = type_map.get(selected_type, selected_type)
-    return [s for s in signals if s.get("type") == target_type]
+    
+    # Flexible matching - check if type contains target (case-insensitive)
+    filtered = []
+    for signal in signals:
+        signal_type = signal.get("type", "").upper()
+        if target_type.upper() in signal_type:
+            filtered.append(signal)
+    
+    return filtered
 
 # Initialize session state
 if 'signals' not in st.session_state:
@@ -141,18 +149,52 @@ if signals:
     if selected_type != "All":
         st.write(f"**Filtered to {len(filtered_signals)} {selected_type} trials**")
     
-    # Data table preview
-    with st.expander("View Raw Trial Data", expanded=False):
+    # Data explorer section - SIMPLIFIED
+st.header("📊 Clinical Trials Data Explorer")
+
+if signals:
+    st.success(f"✅ Loaded {len(signals)} clinical trials")
+    
+    # Show statistics
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("Total Trials", len(signals))
+    with col2:
+        interventional = len([s for s in signals if s.get("type") == "INTERVENTIONAL"])
+        st.metric("Interventional", interventional)
+    with col3:
+        observational = len([s for s in signals if s.get("type") == "OBSERVATIONAL"])
+        st.metric("Observational", observational)
+    
+    # Show filtered count
+    if selected_type != "All":
+        st.write(f"**Filtered to {len(filtered_signals)} {selected_type} trials**")
+    
+    # SIMPLE DATA DISPLAY - Always show something
+    with st.expander("📋 View All Trial Data", expanded=True):
         if filtered_signals:
-            # Create a simple table view
-            for i, trial in enumerate(filtered_signals[:5]):  # Show first 5
-                with st.expander(f"Trial {i+1}: {trial.get('title', 'No title')}"):
-                    st.json(trial)
-            
-            if len(filtered_signals) > 5:
-                st.info(f"Showing first 5 of {len(filtered_signals)} trials")
+            # Show as a simple list first
+            for i, trial in enumerate(filtered_signals):
+                st.write(f"**{i+1}. {trial.get('title', 'No Title')}**")
+                st.write(f"   - ID: {trial.get('id', 'Unknown')}")
+                st.write(f"   - Type: {trial.get('type', 'Unknown')}")
+                st.write(f"   - Status: {trial.get('status', 'Unknown')}")
+                st.write(f"   - Sponsor: {trial.get('sponsor', 'Unknown')}")
+                st.write("---")
         else:
-            st.warning("No trials match the current filter")
+            # Show all signals if filter returns nothing
+            st.warning("No trials match the current filter. Showing all trials:")
+            for i, trial in enumerate(signals[:10]):  # Show first 10
+                st.write(f"**{i+1}. {trial.get('title', 'No Title')}**")
+                st.write(f"   - ID: {trial.get('id', 'Unknown')}")
+                st.write(f"   - Type: {trial.get('type', 'Unknown')}")
+                st.write(f"   - Status: {trial.get('status', 'Unknown')}")
+                st.write("---")
+            
+            if len(signals) > 10:
+                st.info(f"Showing first 10 of {len(signals)} total trials")
+else:
+    st.error("❌ No clinical trial data available. Click the 'Refresh Clinical Trials' button to fetch data.")
 else:
     st.error("❌ No clinical trial data available. Click the 'Refresh Clinical Trials' button in the sidebar to fetch data.")
 
