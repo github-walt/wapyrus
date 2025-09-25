@@ -30,16 +30,20 @@ def fetch_trials(keyword, max_records=50, use_sample=False):
     
     logger.info(f"🔍 Searching for '{keyword}' on ClinicalTrials.gov...")
     
-    # Use the most reliable endpoint
-    API_URL = "https://clinicaltrials.gov/api/query/study_fields"
+    # Use the new ClinicalTrials.gov API v1/studies endpoint
+    API_URL = "https://clinicaltrials.gov/api/v1/studies"
     
     params = {
-        'expr': f'{keyword} AND AREA[StudyType]Interventional',
-        'fields': 'NCTId,BriefTitle,OfficialTitle,Condition,StudyType,OverallStatus,StartDate,CompletionDate,LeadSponsorName',
+        'query.term': f'{keyword} AND AREA[StudyType]Interventional',
+        'fields': 'NCTId|BriefTitle|OfficialTitle|Condition|StudyType|OverallStatus|StartDate|CompletionDate|LeadSponsorName',
         'min_rnk': 1,
         'max_rnk': max_records,
-        'fmt': 'json'
+        'format': 'json'
     }
+    
+    # Log the query URL for diagnostics
+    query_url = f"{API_URL}?{'&'.join([f'{k}={v}' for k, v in params.items()])}"
+    logger.info(f"🔗 Query URL: {query_url}")
     
     normalized_trials = []
     failed_studies = 0
@@ -52,18 +56,20 @@ def fetch_trials(keyword, max_records=50, use_sample=False):
         logger.info(f"📡 API Response: {response.status_code}, Content-Length: {len(response.content)}")
         
         data = response.json()
-        study_count = data.get('StudyFieldsResponse', {}).get('NStudiesFound', 0)
+        
+        # Parse new API v1 response structure
+        study_count = data.get('totalCount', 0)
         logger.info(f"📊 Found {study_count} studies matching '{keyword}'")
         
         if study_count == 0:
             logger.warning("⚠️ No studies found for keyword")
             return fetch_trials_broad(keyword, max_records, use_sample)
         
-        studies = data.get('StudyFieldsResponse', {}).get('StudyFields', [])
+        studies = data.get('studies', [])
         
         for i, study in enumerate(studies):
             try:
-                trial = process_study(study)  # Extract to separate function
+                trial = process_study_v1(study)  # Use new v1 processing function
                 if trial:
                     normalized_trials.append(trial)
             except Exception as e:
@@ -96,35 +102,71 @@ def fetch_trials(keyword, max_records=50, use_sample=False):
     logger.info("🔄 Trying broader search...")
     return fetch_trials_broad(keyword, max_records, use_sample)
 
-def process_study(study):
-    """Process a single study from the API response"""
-    nct_id = study.get('NCTId', [''])[0] if study.get('NCTId') else ''
-    brief_title = study.get('BriefTitle', [''])[0] if study.get('BriefTitle') else ''
-    official_title = study.get('OfficialTitle', [''])[0] if study.get('OfficialTitle') else ''
+def process_study_v1(study):
+    """Process a single study from the new API v1 response"""
+    # Extract protocol section which contains the main study info
+    protocol_section = study.get('protocolSection', {})
+    identification_module = protocol_section.get('identificationModule', {})
+    status_module = protocol_section.get('statusModule', {})
+    design_module = protocol_section.get('designModule', {})
+    conditions_module = protocol_section.get('conditionsModule', {})
+    sponsors_module = protocol_section.get('sponsorCollaboratorsModule', {})
+    
+    # Extract basic information
+    nct_id = identification_module.get('nctId', '')
+    brief_title = identification_module.get('briefTitle', '')
+    official_title = identification_module.get('officialTitle', '')
     
     # Use official title if available, otherwise brief title
     title = official_title if official_title else brief_title
     if not title:
         return None  # Skip if no title
     
+    # Extract conditions
+    conditions = conditions_module.get('conditions', [])
+    condition_str = ', '.join(conditions) if conditions else ''
+    
+    # Extract study type
+    study_type = design_module.get('studyType', 'Interventional')
+    
+    # Extract status
+    overall_status = status_module.get('overallStatus', 'Unknown')
+    
+    # Extract dates
+    start_date_struct = status_module.get('startDateStruct', {})
+    start_date = start_date_struct.get('date', '') if start_date_struct else ''
+    
+    completion_date_struct = status_module.get('completionDateStruct', {})
+    completion_date = completion_date_struct.get('date', '') if completion_date_struct else ''
+    
+    # Extract sponsor
+    lead_sponsor = sponsors_module.get('leadSponsor', {})
+    sponsor_name = lead_sponsor.get('name', 'Not specified') if lead_sponsor else 'Not specified'
+    
     return {
         "id": nct_id,
         "title": title,
-        "condition": ', '.join(study.get('Condition', [])),
-        "type": study.get('StudyType', ['Interventional'])[0] if study.get('StudyType') else 'Interventional',
-        "status": study.get('OverallStatus', ['Unknown'])[0] if study.get('OverallStatus') else 'Unknown',
-        "start_date": study.get('StartDate', [''])[0] if study.get('StartDate') else '',
-        "completion_date": study.get('CompletionDate', [''])[0] if study.get('CompletionDate') else '',
-        "sponsor": study.get('LeadSponsorName', ['Not specified'])[0] if study.get('LeadSponsorName') else 'Not specified',
+        "condition": condition_str,
+        "type": study_type,
+        "status": overall_status,
+        "start_date": start_date,
+        "completion_date": completion_date,
+        "sponsor": sponsor_name,
         "source": "ClinicalTrials.gov"
     }
 
+def process_study(study):
+    """Legacy function for backward compatibility - redirects to v1 processor"""
+    return process_study_v1(study)
+
 def fetch_trials_broad(keyword, max_records, use_sample=False):
-    """Try a broader search with fewer filters"""
+    """Try a broader search with fewer filters using new API v1"""
     if use_sample:
         logger.info("📋 Using sample data for broad search (development mode)")
         return get_comprehensive_sample_data()
-    API_URL = "https://clinicaltrials.gov/api/query/study_fields"
+    
+    # Use the new ClinicalTrials.gov API v1/studies endpoint
+    API_URL = "https://clinicaltrials.gov/api/v1/studies"
     
     # Broader search terms
     search_terms = [
@@ -143,41 +185,59 @@ def fetch_trials_broad(keyword, max_records, use_sample=False):
         if len(all_trials) >= max_records:
             break
             
-        logger.info(f"🔍 Searching for: {term}")
+        logger.info(f"🔍 Broad search for: {term}")
+        
         params = {
-            'expr': term,
-            'fields': 'NCTId,BriefTitle,Condition,StudyType,OverallStatus',
+            'query.term': term,
+            'fields': 'NCTId|BriefTitle|Condition|StudyType|OverallStatus',
+            'min_rnk': 1,
             'max_rnk': min(20, max_records - len(all_trials)),
-            'fmt': 'json'
+            'format': 'json'
         }
+        
+        # Log the query URL for diagnostics
+        query_url = f"{API_URL}?{'&'.join([f'{k}={v}' for k, v in params.items()])}"
+        logger.info(f"🔗 Broad search URL: {query_url}")
         
         try:
             response = requests.get(API_URL, params=params, timeout=30)
+            response.raise_for_status()
+            
+            # Log response details
+            logger.info(f"📡 Broad search response: {response.status_code}, Content-Length: {len(response.content)}")
+            
             data = response.json()
-            studies = data.get('StudyFieldsResponse', {}).get('StudyFields', [])
+            study_count = data.get('totalCount', 0)
+            studies = data.get('studies', [])
+            
+            logger.info(f"📊 Broad search found {study_count} studies for '{term}'")
             
             for study in studies:
-                nct_id = study.get('NCTId', [''])[0]
-                title = study.get('BriefTitle', [''])[0]
-                
-                if nct_id and title and not any(t['id'] == nct_id for t in all_trials):
-                    trial = {
-                        "id": nct_id,
-                        "title": title,
-                        "condition": ', '.join(study.get('Condition', [])),
-                        "type": study.get('StudyType', ['Interventional'])[0],
-                        "status": study.get('OverallStatus', ['Unknown'])[0],
-                        "start_date": "",
-                        "completion_date": "", 
-                        "sponsor": "Various",
-                        "source": "ClinicalTrials.gov"
-                    }
-                    all_trials.append(trial)
+                try:
+                    trial = process_study_v1(study)
+                    if trial and not any(t['id'] == trial['id'] for t in all_trials):
+                        # For broad search, simplify some fields if they're missing
+                        if not trial.get('start_date'):
+                            trial['start_date'] = ""
+                        if not trial.get('completion_date'):
+                            trial['completion_date'] = ""
+                        if not trial.get('sponsor'):
+                            trial['sponsor'] = "Various"
+                        
+                        all_trials.append(trial)
+                except Exception as e:
+                    logger.warning(f"⚠️ Failed to process study in broad search: {e}")
+                    continue
                     
-        except Exception as e:
-            logger.warning(f"⚠️ Search for '{term}' failed: {e}")
+        except requests.RequestException as e:
+            logger.warning(f"⚠️ Network error in broad search for '{term}': {e}")
             continue
-    
+        except json.JSONDecodeError as e:
+            logger.warning(f"⚠️ JSON decode error in broad search for '{term}': {e}")
+            continue
+        except Exception as e:
+            logger.warning(f"⚠️ Unexpected error in broad search for '{term}': {e}")
+            continue
     if all_trials:
         logger.info(f"✅ Found {len(all_trials)} trials via broad search")
         return all_trials
