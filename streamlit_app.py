@@ -122,17 +122,43 @@ with st.sidebar:
     signal_types = ["All", "Clinical Trial", "Observational Study"]
     selected_type = st.selectbox("Filter by study type:", signal_types)
 
-    # Refresh button with proper EU trials integration
+    # Development mode toggle
+    use_sample_mode = st.checkbox("🧪 Development Mode (Use Sample Data)", value=False,
+                                  help="Enable this to use sample data instead of making API calls")
+    
+    # Refresh button with enhanced error handling and diagnostics
     if st.button("🔄 Refresh Clinical Trials", type="primary"):
         with st.spinner("Fetching latest clinical trials from all sources..."):
             try:
+                # Track API call status for diagnostics
+                api_status = {"clinicaltrials_gov": "pending", "eu_ctr": "pending", "errors": []}
+                
                 # 1. Fetch data from ClinicalTrials.gov
                 st.info("🌎 Fetching from ClinicalTrials.gov...")
-                clinical_trials_gov_data = fetch_trials("medtech", max_records=int(max_fetch))
+                try:
+                    clinical_trials_gov_data = fetch_trials("medtech", max_records=int(max_fetch), use_sample=use_sample_mode)
+                    api_status["clinicaltrials_gov"] = "success" if clinical_trials_gov_data else "no_data"
+                    if not clinical_trials_gov_data and not use_sample_mode:
+                        api_status["errors"].append("ClinicalTrials.gov returned no data")
+                except Exception as e:
+                    api_status["clinicaltrials_gov"] = "failed"
+                    api_status["errors"].append(f"ClinicalTrials.gov error: {str(e)}")
+                    clinical_trials_gov_data = []
                 
                 # 2. Fetch data from EU CTR
                 st.info("🇪🇺 Fetching from EU Clinical Trials Register...")
-                eu_trials_data = fetch_eu_trials("medtech")
+                try:
+                    eu_trials_data = fetch_eu_trials("medtech", use_sample=use_sample_mode)
+                    api_status["eu_ctr"] = "success" if eu_trials_data else "no_data"
+                    if not eu_trials_data and not use_sample_mode:
+                        api_status["errors"].append("EU CTR returned no data")
+                except Exception as e:
+                    api_status["eu_ctr"] = "failed"
+                    api_status["errors"].append(f"EU CTR error: {str(e)}")
+                    eu_trials_data = []
+                
+                # Store API status for diagnostics
+                st.session_state.last_api_status = api_status
                 
                 # 3. Combine both data sources
                 all_trials = clinical_trials_gov_data + eu_trials_data
@@ -143,45 +169,85 @@ with st.sidebar:
                     st.session_state.signals = all_trials
                     st.session_state.last_update = datetime.now()
                     
-                    # Show success message with breakdown
+                    # Enhanced success message with data source analysis
+                    real_count = len([t for t in all_trials if "Sample" not in t.get('source', '') and not t.get('id', '').startswith('NCT00')])
+                    sample_count = len(all_trials) - real_count
+                    
                     st.success(f"✅ Successfully fetched {len(all_trials)} trials!")
                     st.info(f"📊 Breakdown: {len(clinical_trials_gov_data)} from ClinicalTrials.gov + {len(eu_trials_data)} from EU CTR")
+                    
+                    # Data quality indicators
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        if real_count > 0:
+                            st.success(f"🌐 {real_count} real trials")
+                        else:
+                            st.warning("⚠️ No real trials fetched")
+                    with col2:
+                        if sample_count > 0:
+                            if use_sample_mode:
+                                st.info(f"📋 {sample_count} sample trials (development mode)")
+                            else:
+                                st.warning(f"⚠️ {sample_count} sample trials (API fallback)")
+                    
+                    # Show any errors that occurred
+                    if api_status["errors"]:
+                        with st.expander("⚠️ API Issues Detected"):
+                            for error in api_status["errors"]:
+                                st.warning(error)
                 else:
-                    st.error("❌ No trials were fetched. APIs might be unavailable.")
+                    st.error("❌ No trials were fetched from any source.")
+                    if not use_sample_mode:
+                        st.info("💡 Try enabling 'Development Mode' to use sample data for testing.")
                     
             except Exception as e:
-                st.error(f"❌ Failed to fetch trials: {str(e)}")
-                # Fallback to sample data
-                st.info("🔄 Loading sample data instead...")
-                sample_data = [
-                    {
-                        "id": "NCT00123456",
-                        "title": "Sample MedTech Trial - Cardiovascular Device",
-                        "condition": "Heart Disease",
-                        "type": "INTERVENTIONAL",
-                        "status": "RECRUITING",
-                        "start_date": "2024-01-15",
-                        "completion_date": "2025-12-31",
-                        "sponsor": "Sample Sponsor Inc.",
-                        "source": "Sample Data"
-                    }
-                ]
-                save_to_json(sample_data, "knowledge_base.json")
-                st.session_state.signals = sample_data
-                st.session_state.last_update = datetime.now()
+                st.error(f"❌ Unexpected error during fetch: {str(e)}")
+                st.session_state.last_api_status = {"error": str(e)}
     
     # Show last update
     if st.session_state.last_update:
         st.info(f"📅 Last update: {st.session_state.last_update.strftime('%Y-%m-%d %H:%M')}")
     
-    # Debug info (collapsible)
-    with st.expander("Debug Info"):
-        st.write(f"Signals loaded: {len(st.session_state.signals)}")
+    # Enhanced diagnostic information
+    with st.expander("🔧 Diagnostic Information"):
+        st.write(f"**Signals loaded:** {len(st.session_state.signals)}")
         
         if st.session_state.signals:
             if os.path.exists("knowledge_base.json"):
                 file_size = os.path.getsize("knowledge_base.json")
-                st.write(f"File size: {file_size} bytes")
+                st.write(f"**File size:** {file_size} bytes")
+            
+            # Data quality analysis
+            real_data_count = 0
+            sample_data_count = 0
+            
+            for signal in st.session_state.signals:
+                source = signal.get('source', '')
+                signal_id = signal.get('id', '')
+                
+                # Detect sample data by source name or ID pattern
+                if ("Sample" in source or
+                    signal_id.startswith('NCT00') or
+                    signal_id.startswith('EU-') or
+                    "sample" in signal.get('title', '').lower()):
+                    sample_data_count += 1
+                else:
+                    real_data_count += 1
+            
+            # Show data quality metrics
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric("Real Data", real_data_count,
+                         delta=f"{real_data_count/(real_data_count+sample_data_count)*100:.1f}%" if (real_data_count+sample_data_count) > 0 else "0%")
+            with col2:
+                st.metric("Sample Data", sample_data_count,
+                         delta=f"{sample_data_count/(real_data_count+sample_data_count)*100:.1f}%" if (real_data_count+sample_data_count) > 0 else "0%")
+            
+            # Data quality warning
+            if sample_data_count > real_data_count:
+                st.warning("⚠️ Mostly sample data detected. Check API connectivity or enable development mode.")
+            elif real_data_count > 0:
+                st.success("✅ Real data successfully loaded!")
             
             # Show sources breakdown
             sources = {}
@@ -189,9 +255,48 @@ with st.sidebar:
                 source = signal.get('source', 'Unknown')
                 sources[source] = sources.get(source, 0) + 1
             
-            st.write("Data sources:")
+            st.write("**Data sources breakdown:**")
             for source, count in sources.items():
-                st.write(f"- {source}: {count} trials")
+                # Add indicators for sample vs real data
+                if "Sample" in source:
+                    st.write(f"📋 {source}: {count} trials")
+                else:
+                    st.write(f"🌐 {source}: {count} trials")
+            
+            # Show last API status if available
+            if hasattr(st.session_state, 'last_api_status') and st.session_state.last_api_status:
+                st.write("**Last API Status:**")
+                status = st.session_state.last_api_status
+                
+                if "error" in status:
+                    st.error(f"❌ {status['error']}")
+                else:
+                    # Show individual API statuses
+                    if "clinicaltrials_gov" in status:
+                        ct_status = status["clinicaltrials_gov"]
+                        if ct_status == "success":
+                            st.success("✅ ClinicalTrials.gov: Success")
+                        elif ct_status == "no_data":
+                            st.warning("⚠️ ClinicalTrials.gov: No data returned")
+                        elif ct_status == "failed":
+                            st.error("❌ ClinicalTrials.gov: Failed")
+                    
+                    if "eu_ctr" in status:
+                        eu_status = status["eu_ctr"]
+                        if eu_status == "success":
+                            st.success("✅ EU CTR: Success")
+                        elif eu_status == "no_data":
+                            st.warning("⚠️ EU CTR: No data returned")
+                        elif eu_status == "failed":
+                            st.error("❌ EU CTR: Failed")
+                    
+                    # Show any specific errors
+                    if "errors" in status and status["errors"]:
+                        st.write("**Specific Issues:**")
+                        for error in status["errors"]:
+                            st.error(f"• {error}")
+        else:
+            st.info("No data loaded. Click 'Refresh Clinical Trials' to fetch data.")
 
 # Main content area
 st.header("Ask Roo")

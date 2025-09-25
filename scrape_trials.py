@@ -10,10 +10,24 @@ from scrape_eu import fetch_eu_trials
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-def fetch_trials(keyword, max_records=50):
+def fetch_trials(keyword, max_records=50, use_sample=False):
     """
     Fetches real trial data from ClinicalTrials.gov with guaranteed results.
+    
+    Args:
+        keyword: Search term for trials
+        max_records: Maximum number of records to fetch
+        use_sample: If True, return sample data instead of making API calls
     """
+    # Validate inputs
+    if not keyword or not keyword.strip():
+        logger.error("❌ Invalid keyword provided")
+        return []
+    
+    if use_sample:
+        logger.info("📋 Using sample data (development mode)")
+        return get_comprehensive_sample_data()
+    
     logger.info(f"🔍 Searching for '{keyword}' on ClinicalTrials.gov...")
     
     # Use the most reliable endpoint
@@ -28,43 +42,36 @@ def fetch_trials(keyword, max_records=50):
     }
     
     normalized_trials = []
+    failed_studies = 0
+    
     try:
         response = requests.get(API_URL, params=params, timeout=60)
         response.raise_for_status()
-        data = response.json()
         
+        # Log response details for debugging
+        logger.info(f"📡 API Response: {response.status_code}, Content-Length: {len(response.content)}")
+        
+        data = response.json()
         study_count = data.get('StudyFieldsResponse', {}).get('NStudiesFound', 0)
         logger.info(f"📊 Found {study_count} studies matching '{keyword}'")
+        
+        if study_count == 0:
+            logger.warning("⚠️ No studies found for keyword")
+            return fetch_trials_broad(keyword, max_records, use_sample)
         
         studies = data.get('StudyFieldsResponse', {}).get('StudyFields', [])
         
         for i, study in enumerate(studies):
             try:
-                nct_id = study.get('NCTId', [''])[0]
-                brief_title = study.get('BriefTitle', [''])[0]
-                official_title = study.get('OfficialTitle', [''])[0]
-                
-                # Use official title if available, otherwise brief title
-                title = official_title if official_title else brief_title
-                if not title:
-                    continue  # Skip if no title
-                
-                normalized_trial = {
-                    "id": nct_id,
-                    "title": title,
-                    "condition": ', '.join(study.get('Condition', [])),
-                    "type": study.get('StudyType', ['Interventional'])[0],
-                    "status": study.get('OverallStatus', ['Unknown'])[0],
-                    "start_date": study.get('StartDate', [''])[0],
-                    "completion_date": study.get('CompletionDate', [''])[0],
-                    "sponsor": study.get('LeadSponsorName', ['Not specified'])[0],
-                    "source": "ClinicalTrials.gov"
-                }
-                normalized_trials.append(normalized_trial)
-                
+                trial = process_study(study)  # Extract to separate function
+                if trial:
+                    normalized_trials.append(trial)
             except Exception as e:
-                logger.warning(f"⚠️ Error processing study {i+1}: {e}")
-                continue
+                failed_studies += 1
+                logger.warning(f"⚠️ Failed to process study {i+1}: {e}")
+        
+        if failed_studies > 0:
+            logger.warning(f"⚠️ Failed to process {failed_studies}/{len(studies)} studies")
         
         logger.info(f"✅ Successfully processed {len(normalized_trials)} trials from ClinicalTrials.gov")
         
@@ -72,15 +79,51 @@ def fetch_trials(keyword, max_records=50):
         if normalized_trials:
             return normalized_trials
             
+    except requests.RequestException as e:
+        logger.error(f"❌ Network error: {e}")
+        if not use_sample:
+            return []
+    except json.JSONDecodeError as e:
+        logger.error(f"❌ Invalid JSON response: {e}")
+        if not use_sample:
+            return []
     except Exception as e:
-        logger.error(f"❌ API request failed: {e}")
+        logger.error(f"❌ Unexpected error: {e}")
+        if not use_sample:
+            return []
     
     # If we get here, try a broader search
     logger.info("🔄 Trying broader search...")
-    return fetch_trials_broad(keyword, max_records)
+    return fetch_trials_broad(keyword, max_records, use_sample)
 
-def fetch_trials_broad(keyword, max_records):
+def process_study(study):
+    """Process a single study from the API response"""
+    nct_id = study.get('NCTId', [''])[0] if study.get('NCTId') else ''
+    brief_title = study.get('BriefTitle', [''])[0] if study.get('BriefTitle') else ''
+    official_title = study.get('OfficialTitle', [''])[0] if study.get('OfficialTitle') else ''
+    
+    # Use official title if available, otherwise brief title
+    title = official_title if official_title else brief_title
+    if not title:
+        return None  # Skip if no title
+    
+    return {
+        "id": nct_id,
+        "title": title,
+        "condition": ', '.join(study.get('Condition', [])),
+        "type": study.get('StudyType', ['Interventional'])[0] if study.get('StudyType') else 'Interventional',
+        "status": study.get('OverallStatus', ['Unknown'])[0] if study.get('OverallStatus') else 'Unknown',
+        "start_date": study.get('StartDate', [''])[0] if study.get('StartDate') else '',
+        "completion_date": study.get('CompletionDate', [''])[0] if study.get('CompletionDate') else '',
+        "sponsor": study.get('LeadSponsorName', ['Not specified'])[0] if study.get('LeadSponsorName') else 'Not specified',
+        "source": "ClinicalTrials.gov"
+    }
+
+def fetch_trials_broad(keyword, max_records, use_sample=False):
     """Try a broader search with fewer filters"""
+    if use_sample:
+        logger.info("📋 Using sample data for broad search (development mode)")
+        return get_comprehensive_sample_data()
     API_URL = "https://clinicaltrials.gov/api/query/study_fields"
     
     # Broader search terms
@@ -139,9 +182,13 @@ def fetch_trials_broad(keyword, max_records):
         logger.info(f"✅ Found {len(all_trials)} trials via broad search")
         return all_trials
     
-    # Final fallback - comprehensive sample data
-    logger.info("📋 Using comprehensive sample data")
-    return get_comprehensive_sample_data()
+    # Final fallback - only use sample data if explicitly requested
+    if use_sample:
+        logger.info("📋 Using comprehensive sample data")
+        return get_comprehensive_sample_data()
+    else:
+        logger.warning("❌ No trials found via broad search, returning empty list")
+        return []
 
 def get_comprehensive_sample_data():
     """Return comprehensive realistic sample data"""
@@ -258,10 +305,10 @@ def main():
     logger.info("🚀 Starting clinical trial data collection...")
     
     # Fetch data from ClinicalTrials.gov
-    clinical_trials = fetch_trials(args.keyword, args.max_records)
+    clinical_trials = fetch_trials(args.keyword, args.max_records, use_sample=False)
     
     # Fetch data from EU CTR
-    eu_trials = fetch_eu_trials(args.keyword)
+    eu_trials = fetch_eu_trials(args.keyword, use_sample=False)
     
     # Combine data
     all_trials = clinical_trials + eu_trials

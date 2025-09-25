@@ -12,15 +12,107 @@ from urllib.parse import quote, urljoin
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-def fetch_eu_trials(keyword):
+def fetch_eu_trials(keyword, use_sample=False):
     """
     Fetches comprehensive EU clinical trial data.
+    
+    Args:
+        keyword: Search term for trials
+        use_sample: If True, return sample data instead of making API calls
     """
+    # Validate inputs
+    if not keyword or not keyword.strip():
+        logger.error("❌ Invalid keyword provided")
+        return []
+    
+    if use_sample:
+        logger.info("📋 Using sample EU data (development mode)")
+        return get_comprehensive_eu_sample_data(keyword)
+    
     logger.info(f"🔍 Searching for '{keyword}' on EU Clinical Trials Register...")
     
-    # Always return comprehensive sample data for now
-    # (Web scraping is often blocked, so we use realistic sample data)
-    return get_comprehensive_eu_sample_data(keyword)
+    try:
+        # Attempt real EU scraping
+        real_trials = attempt_real_eu_scraping(keyword)
+        if real_trials:
+            logger.info(f"✅ Successfully fetched {len(real_trials)} real EU trials")
+            return real_trials
+        else:
+            logger.warning("⚠️ No real EU trials found, returning empty list")
+            return []
+    except Exception as e:
+        logger.error(f"❌ EU scraping failed: {e}")
+        return []
+
+def attempt_real_eu_scraping(keyword):
+    """
+    Attempt to scrape real data from EU Clinical Trials Register.
+    This is a basic implementation that can be enhanced.
+    """
+    try:
+        # EU CTR search URL
+        base_url = "https://www.clinicaltrialsregister.eu/ctr-search/search"
+        
+        # Parameters for the search
+        params = {
+            'query': keyword,
+            'page': 1
+        }
+        
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        }
+        
+        logger.info(f"🌐 Attempting to scrape EU CTR for '{keyword}'...")
+        
+        response = requests.get(base_url, params=params, headers=headers, timeout=30)
+        response.raise_for_status()
+        
+        # Parse the HTML response
+        soup = BeautifulSoup(response.content, 'html.parser')
+        
+        # Look for trial results (this is a basic implementation)
+        # The actual EU CTR structure may require more sophisticated parsing
+        trial_elements = soup.find_all('div', class_='result')
+        
+        trials = []
+        for element in trial_elements[:10]:  # Limit to first 10 results
+            try:
+                # Extract basic information (this would need to be adapted to actual HTML structure)
+                title_elem = element.find('h3') or element.find('a')
+                title = title_elem.get_text(strip=True) if title_elem else f"EU Trial for {keyword}"
+                
+                # Generate a basic trial structure
+                trial = {
+                    "id": f"EU-{len(trials)+1:04d}-{keyword[:4].upper()}",
+                    "title": title,
+                    "condition": keyword.title(),
+                    "type": "Interventional",
+                    "status": "Unknown",
+                    "start_date": "",
+                    "completion_date": "",
+                    "sponsor": "EU Sponsor",
+                    "source": "EU Clinical Trials Register"
+                }
+                trials.append(trial)
+                
+            except Exception as e:
+                logger.warning(f"⚠️ Error parsing EU trial element: {e}")
+                continue
+        
+        if trials:
+            logger.info(f"✅ Scraped {len(trials)} trials from EU CTR")
+            return [normalize_trial_data(trial) for trial in trials]
+        else:
+            logger.warning("⚠️ No trials found in EU CTR response")
+            return []
+            
+    except requests.RequestException as e:
+        logger.error(f"❌ Network error accessing EU CTR: {e}")
+        raise
+    except Exception as e:
+        logger.error(f"❌ Error scraping EU CTR: {e}")
+        raise
 
 def get_comprehensive_eu_sample_data(keyword):
     """Return comprehensive realistic EU trial data"""
@@ -170,8 +262,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Scrape clinical trial data from the EU Clinical Trials Register.")
     parser.add_argument("keyword", help="The keyword to search for (e.g., 'medtech').")
     parser.add_argument("--output", default="eu_trials.json", help="Output filename.")
+    parser.add_argument("--use_sample", action="store_true", help="Use sample data instead of real scraping.")
     
     args = parser.parse_args()
     
-    eu_trials_data = fetch_eu_trials(args.keyword)
+    eu_trials_data = fetch_eu_trials(args.keyword, use_sample=args.use_sample)
     save_to_json(eu_trials_data, args.output)
