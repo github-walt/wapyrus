@@ -1,0 +1,8 @@
+streamlit>=1.36.0
+groq>=0.3.0
+requests>=2.31.0
+pandas>=2.2.0
+plotly>=5.0.0
+tenacity>=8.2.0  # For retry logic
+beautifulsoup4>=4.9.3
+
